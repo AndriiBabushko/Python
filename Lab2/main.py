@@ -5,9 +5,9 @@ import math
 # task 1
 def task_1_interval_int_list(some_int_list):
     some_result_list = []
-    for i in range(len(some_int_list)):
-        if 1 <= some_int_list[i] <= 3:
-            some_result_list.append(some_int_list[i])
+    for index in range(len(some_int_list)):
+        if 1 <= some_int_list[index] <= 3:
+            some_result_list.append(some_int_list[index])
 
     return some_result_list
 
@@ -118,3 +118,18 @@ print('\nTASK 8!!!')
 some_numbers = [10, -10, -10.5, -143411, 12032, +120, 1, 0, -1]
 print(f'Range of numbers: {some_numbers}')
 print(f'Number of positive numbers in range: {task_8_positive_numbers(some_numbers)}')
+
+
+# task 9
+def task_9_sum_some_range(a, b):
+    sum_some_range = 0
+    for some_num in range(a, b + 1, 1):
+        sum_some_range += some_num
+
+    return sum_some_range
+
+
+print('\nTASK 9!!!')
+A = 5
+B = 30
+print(f'Sum of range from A({A}) to B({B}): {task_9_sum_some_range(A, B)}')
