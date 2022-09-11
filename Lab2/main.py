@@ -26,7 +26,7 @@ def is_leap_year(year):
     return False
 
 
-# task 3 functions
+# task 3 function
 def task_3_purchase_discount(purchase):
     if 500 <= purchase < 1000:
         return purchase - purchase * 0.03
@@ -35,8 +35,14 @@ def task_3_purchase_discount(purchase):
     return purchase
 
 
-def task_4_min_cosine(angles_list):
-    return math.cos(min(angles_list))
+# task 4 function
+def task_4_min_cosine(angles):
+    return math.cos(min(angles))
+
+
+# task 5 function
+def task_5_max_sin(angles):
+    return math.sin(max(angles))
 
 
 # task 1
@@ -59,6 +65,12 @@ for i in range(len(task_3_purchases)):
 
 # task 4
 print('\nTASK 4!!!')
-task_4_angles_list = [30, 80, 210, 180, 360]
-print(f'Angles list: {task_4_angles_list}')
-print(f'Min cos from angles list: {task_4_min_cosine(task_4_angles_list)}')
+angles_list = [math.radians(30 / math.pi), math.radians(60 / math.pi), math.radians(90 / math.pi),
+               math.radians(120 / math.pi), math.radians(360 / math.pi)]
+print(f'Angles list: {angles_list}')
+print(f'Min cos in radians from angles list: {task_4_min_cosine(angles_list)}')
+
+# task 5
+print('\nTASK 5!!!')
+print(f'Angles list: {angles_list}')
+print(f'Max sin in radians from angles list: {task_5_max_sin(angles_list)}')
