@@ -131,5 +131,18 @@ def task_9_sum_some_range(a, b):
 
 print('\nTASK 9!!!')
 A = 5
-B = 30
+B = 15
 print(f'Sum of range from A({A}) to B({B}): {task_9_sum_some_range(A, B)}')
+
+
+# task 10
+def task_10_sum_squares_some_range(a, b):
+    sum_squares_some_range = 0
+    for some_num in range(a, b + 1, 1):
+        sum_squares_some_range += math.pow(some_num, 2)
+
+    return sum_squares_some_range
+
+
+print('\nTASK 10!!!')
+print(f'Sum of range from A({A}) to B({B}): {task_10_sum_squares_some_range(A, B)}')
