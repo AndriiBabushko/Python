@@ -1,4 +1,5 @@
 """ Lab 1. Python. Andrii Babushko. Repository: https://github.com/AndriiBabushko/Python """
+import math
 
 
 # task 1 function
@@ -34,6 +35,10 @@ def task_3_purchase_discount(purchase):
     return purchase
 
 
+def task_4_min_cosine(angles_list):
+    return math.cos(min(angles_list))
+
+
 # task 1
 print('\nTASK 1!!!')
 task_1_list = [1, 2, 5, 4, 10, 15, 3]
@@ -51,3 +56,9 @@ print('\nTASK 3!!!')
 task_3_purchases = [490, 510, 800, 1100, 2100]
 for i in range(len(task_3_purchases)):
     print(f'Purchase: {task_3_purchases[i]}\nFinal price: {task_3_purchase_discount(task_3_purchases[i])}\n')
+
+# task 4
+print('\nTASK 4!!!')
+task_4_angles_list = [30, 80, 210, 180, 360]
+print(f'Angles list: {task_4_angles_list}')
+print(f'Min cos from angles list: {task_4_min_cosine(task_4_angles_list)}')
