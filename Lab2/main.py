@@ -72,6 +72,19 @@ print('\nTASK 5!!!')
 print(f'Angles list: {angles_list}')
 print(f'Max sin in radians from angles list: {task_5_max_sin(angles_list)}')
 
-# task 6
-print('\nTASK 6!!!')
 
+# task 6
+def task_6_isosceles_triangle(sides):
+    s = (sides[0] * sides[1]) / 2
+    if s % 2 == 0:
+        s /= 2
+        print(f'The area of the triangle: {s}')
+    else:
+        print(f"The S({s}), I can\'t divide by 2!")
+
+
+print('\nTASK 6!!!')
+left_right_sides = 1
+base_side = 2
+for x in range(1, 13, 3):
+    task_6_isosceles_triangle([left_right_sides + x, base_side + x])
