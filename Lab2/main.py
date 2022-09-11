@@ -146,3 +146,31 @@ def task_10_sum_squares_some_range(a, b):
 
 print('\nTASK 10!!!')
 print(f'Sum of range from A({A}) to B({B}): {task_10_sum_squares_some_range(A, B)}')
+
+
+# task 11
+def task_11_arithmetic_mean(a, b):
+    arithmetic_mean_sum = 0
+    count_nums = 0
+    for some_num in range(a, b + 1):
+        arithmetic_mean_sum += some_num
+        count_nums += 1
+
+    return arithmetic_mean_sum / count_nums
+
+
+def enter_A_and_B():
+    while True:
+        a = int(input('Enter A for task 11: '))
+        b = int(input('Enter B for task 11: '))
+        if a < b:
+            break
+
+    return [a, b]
+
+
+print('\nTASK 11!!!')
+some_range = enter_A_and_B()
+print(
+    f'Sum of range from A({some_range[0]}) to B({some_range[1]}): {task_11_arithmetic_mean(some_range[0], some_range[1])}')
+
