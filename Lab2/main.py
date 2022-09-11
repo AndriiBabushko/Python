@@ -145,7 +145,7 @@ def task_10_sum_squares_some_range(a, b):
 
 
 print('\nTASK 10!!!')
-print(f'Sum of range from A({A}) to B({B}): {task_10_sum_squares_some_range(A, B)}')
+print(f'Sum of squares of range from A({A}) to B({B}): {task_10_sum_squares_some_range(A, B)}')
 
 
 # task 11
@@ -171,8 +171,8 @@ def enter_A_and_B():
 
 print('\nTASK 11!!!')
 some_range = enter_A_and_B()
-print(
-    f'Sum of range from A({some_range[0]}) to B({some_range[1]}): {task_11_arithmetic_mean(some_range[0], some_range[1])}')
+print(f'Arithmetic mean from A({some_range[0]}) to B({some_range[1]}):'
+      f'{task_11_arithmetic_mean(some_range[0], some_range[1])}')
 
 
 # task 12
@@ -187,3 +187,17 @@ def task_12_sum_some_range(a, b):
 
 print('\nTASK 12!!!')
 print(f'Sum of range from A({A}) to B({B}): {task_12_sum_some_range(A, B)}')
+
+
+# task 13
+def task_13_sum_some_square_range(a):
+    sum_some_squares = 0
+    for sum_num in range(a, 51, 1):
+        sum_some_squares += math.pow(sum_num, 2)
+
+    return sum_some_squares
+
+
+print('\nTASK 13!!!')
+A = 48
+print(f'Sum of squares of range from A({A}) to 50: {task_13_sum_some_square_range(A)}')
