@@ -100,5 +100,21 @@ def task_7_english_month(month_number):
         print(f'{month_number} number of month isn\'t in range [1, 12]!')
 
 
+print('\nTASK 7!!!')
 for i in range(0, 14):
     task_7_english_month(i)
+
+
+# task 8
+def task_8_positive_numbers(numbers):
+    positive_counter = 0
+    for number in numbers:
+        if number >= 1:
+            positive_counter += 1
+    return positive_counter
+
+
+print('\nTASK 8!!!')
+some_numbers = [10, -10, -10.5, -143411, 12032, +120, 1, 0, -1]
+print(f'Range of numbers: {some_numbers}')
+print(f'Number of positive numbers in range: {task_8_positive_numbers(some_numbers)}')
