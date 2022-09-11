@@ -174,3 +174,16 @@ some_range = enter_A_and_B()
 print(
     f'Sum of range from A({some_range[0]}) to B({some_range[1]}): {task_11_arithmetic_mean(some_range[0], some_range[1])}')
 
+
+# task 12
+def task_12_sum_some_range(a, b):
+    sum_some_range = 0
+    while a <= b:
+        sum_some_range += a
+        a += 1
+
+    return sum_some_range
+
+
+print('\nTASK 12!!!')
+print(f'Sum of range from A({A}) to B({B}): {task_12_sum_some_range(A, B)}')
