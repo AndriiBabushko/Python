@@ -88,3 +88,17 @@ left_right_sides = 1
 base_side = 2
 for x in range(1, 13, 3):
     task_6_isosceles_triangle([left_right_sides + x, base_side + x])
+
+
+# task 7
+def task_7_english_month(month_number):
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+              'November', 'December']
+    if 1 <= month_number <= 12:
+        print(f'{month_number} month is {months[month_number - 1]}')
+    else:
+        print(f'{month_number} number of month isn\'t in range [1, 12]!')
+
+
+for i in range(0, 14):
+    task_7_english_month(i)
