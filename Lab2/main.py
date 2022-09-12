@@ -228,7 +228,7 @@ N = enter_N()
 print(f'Some K from N({N}): {task_14_find_K(N)}')
 
 
-# task 14
+# task 15
 def task_15_find_number_greater_n(n):
     for number in range(1, n, 1):
         some_number = math.pow(number, 2)
@@ -242,4 +242,20 @@ def task_15_find_number_greater_n(n):
 
 print('\nTASK 15!!!')
 N = enter_N()
-print(f'The number greater than n: {task_15_find_number_greater_n(N)}')
+print(f'The first number that greater than n: {task_15_find_number_greater_n(N)}')
+
+
+# task 15
+def task_16_find_number_greater_n(n):
+    some_number = 1
+    iterator = 2
+    while some_number < n:
+        some_number = math.pow(iterator, 2) + 1
+        iterator += 1
+
+    return some_number
+
+
+print('\nTASK 16!!!')
+N = enter_N()
+print(f'The first number that greater than n: {task_16_find_number_greater_n(N)}')
