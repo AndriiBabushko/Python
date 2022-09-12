@@ -201,3 +201,28 @@ def task_13_sum_some_square_range(a):
 print('\nTASK 13!!!')
 A = 48
 print(f'Sum of squares of range from A({A}) to 50: {task_13_sum_some_square_range(A)}')
+
+
+# task 14
+def task_14_find_K(N):
+    K = N
+    K_array = [K]
+    while math.pow(5, K) > N:
+        K -= 1
+        K_array.append(K)
+
+    return min(K_array)
+
+
+def enter_N():
+    while True:
+        some_N = int(input('Enter N: '))
+        if some_N > 1:
+            break
+
+    return some_N
+
+
+print('\nTASK 14!!!')
+N = enter_N()
+print(f'Some K from N({N}): {task_14_find_K(N)}')
