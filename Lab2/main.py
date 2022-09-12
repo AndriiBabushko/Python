@@ -204,10 +204,10 @@ print(f'Sum of squares of range from A({A}) to 50: {task_13_sum_some_square_rang
 
 
 # task 14
-def task_14_find_K(N):
-    K = N
+def task_14_find_K(N_number):
+    K = N_number
     K_array = [K]
-    while math.pow(5, K) > N:
+    while math.pow(5, K) > N_number:
         K -= 1
         K_array.append(K)
 
@@ -226,3 +226,20 @@ def enter_N():
 print('\nTASK 14!!!')
 N = enter_N()
 print(f'Some K from N({N}): {task_14_find_K(N)}')
+
+
+# task 14
+def task_15_find_number_greater_n(n):
+    for number in range(1, n, 1):
+        some_number = math.pow(number, 2)
+        if some_number > n:
+            return some_number
+        else:
+            continue
+
+    return n
+
+
+print('\nTASK 15!!!')
+N = enter_N()
+print(f'The number greater than n: {task_15_find_number_greater_n(N)}')
