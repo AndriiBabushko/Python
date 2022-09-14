@@ -245,7 +245,7 @@ N = enter_N()
 print(f'The first number that greater than n: {task_15_find_number_greater_n(N)}')
 
 
-# task 15
+# task 16
 def task_16_find_number_greater_n(n):
     some_number = 1
     iterator = 2
