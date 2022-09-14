@@ -156,6 +156,28 @@ task_10_result = task_10_search_words_start_end_letters(task_10_some_text, task_
 if task_10_result > 0:
     print(f'Words that started with {task_10_start_letter} and end with {task_10_end_letter}: {task_10_result}')
 else:
-    print('None words found')
+    print('No words found')
 
 
+# task 11
+def task_11_search_words_start_end_letters(text):
+    count_vowels = 0
+    lower_text = text.lower()
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+    for char in lower_text:
+        if char in vowels:
+            count_vowels += 1
+
+    return count_vowels
+
+
+print('\nTASK 11!!!')
+task_11_some_text = 'Computer science, the study of computers and computing, including their theoretical and ' \
+                    'algorithmic foundations, hardware and software, and their uses for processing information.'
+print(f'Text for task 11: "{task_11_some_text}"')
+
+task_11_result = task_11_search_words_start_end_letters(task_11_some_text)
+if task_11_result > 0:
+    print(f'Count of vowels: {task_11_result}')
+else:
+    print('No vowels found')
