@@ -61,3 +61,15 @@ print(f'Task 4 text: "{task_4_some_text}"')
 task_4_changes = task_4_count_a_o(task_4_some_text)
 print(f'Count changes from "a" to "o": {task_4_changes[0]}')
 print(f'String length: {task_4_changes[1]}')
+
+
+# task 5
+def task_5_change_upper_lower(text):
+    new_text = text.lower()
+    return new_text
+
+
+print('\nTASK 5!!!')
+task_5_some_text = 'FDDFDF sdsdfsf FdHfHkLjNkKgGf FDFDsdsd dfdfDFFDFD'
+print(f'Text before changes: "{task_5_some_text}"')
+print(f'Text after changes: {task_5_change_upper_lower(task_5_some_text)}')
