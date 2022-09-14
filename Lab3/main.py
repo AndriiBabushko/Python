@@ -129,3 +129,31 @@ task_9_some_text = 'Computer science, the study of computers and computing, incl
                    'algorithmic foundations, hardware and software, and their uses for processing information.'
 print(f'Text before changes: "{task_9_some_text}"')
 print(f'Text after changes: "{task_9_capitalize_first_word_letters(task_9_some_text)}"')
+
+
+# task 10
+def task_10_search_words_start_end_letters(text, start_letter, end_letter):
+    count_words = 0
+    upper_text = text.upper()
+    split_text = upper_text.split(' ')
+    start_letter = start_letter.upper()
+    end_letter = end_letter.upper()
+    for i in range(0, len(split_text), 1):
+        if split_text[i][0] == start_letter and split_text[i][len(split_text[i]) - 1] == end_letter:
+            count_words += 1
+        else:
+            continue
+    return count_words
+
+
+print('\nTASK 10!!!')
+task_10_some_text = 'nomputem nciencn, NhP NtudP of computers and computing, including their theoretical and ' \
+                    'algorithmic Noundationp, hardware and MoftwarP, nnP their uses for NrocessinP information.'
+print(f'Text for task 10: "{task_10_some_text}"')
+task_10_start_letter = str(input('Enter start letter for searching: '))
+task_10_end_letter = str(input('Enter end letter for searching: '))
+task_10_result = task_10_search_words_start_end_letters(task_10_some_text, task_10_start_letter, task_10_end_letter)
+if task_10_result > 0:
+    print(f'Words that started with {task_10_start_letter} and end with {task_10_end_letter}: {task_10_result}')
+else:
+    print('None words found')
