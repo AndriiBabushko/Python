@@ -32,7 +32,7 @@ def task_2_change_text(text):
 print('\nTASK 2!!!')
 task_2_some_text = ': % % :: %% dfd 1212dffd12121 % :'
 print(f'Task 2 text: "{task_2_some_text}"')
-print(f'Count changes from : to %: {task_2_change_text(task_2_some_text)}')
+print(f'Count changes from ":" to "%": {task_2_change_text(task_2_some_text)}')
 
 
 # task 3
@@ -45,4 +45,19 @@ def task_3_delete_dots(text):
 print('\nTASK 3!!!')
 task_3_some_text = '. ; : ^% $ # @#$ *& )* .. ... . dfsd 123'
 print(f'Task 3 text: "{task_3_some_text}"')
-print(f'Count changes from : to %: {task_3_delete_dots(task_3_some_text)}')
+print(f'Count deleted "." : {task_3_delete_dots(task_3_some_text)}')
+
+
+# task 4
+def task_4_count_a_o(text):
+    new_text = text.replace('a', 'o')
+    print(f'Text after changes: {new_text}')
+    return [text.count('a'), len(new_text)]
+
+
+print('\nTASK 4!!!')
+task_4_some_text = 'a ddgdgdgdgd aa oaoaoaoao fdfgdaaafddfgooo o fgfdg oooaaa'
+print(f'Task 4 text: "{task_4_some_text}"')
+task_4_changes = task_4_count_a_o(task_4_some_text)
+print(f'Count changes from "a" to "o": {task_4_changes[0]}')
+print(f'String length: {task_4_changes[1]}')
