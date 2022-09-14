@@ -101,3 +101,18 @@ task_7_some_text = 'п ввавввап ппп длодлдодлол ** авп�
 print(f'Text before changes: "{task_7_some_text}"')
 task_7_result = task_7_delete_o(task_7_some_text)
 print(f'Text after changes: {task_7_result}')
+
+
+# task 8
+def task_8_get_word_count_in_text(text, searched_word):
+    return text.count(searched_word)
+
+
+print('\nTASK 8!!!')
+task_8_some_text = 'apple banana ihor juice raccoon'
+print(f'Text for searching: "{task_8_some_text}"')
+task_8_searching_word = input('Enter searching word: ')
+task_8_result = task_8_get_word_count_in_text(task_8_some_text, task_8_searching_word)
+print(f'Count of word({task_8_searching_word}) in text: {task_8_result}')
+
+
