@@ -116,3 +116,16 @@ task_8_result = task_8_get_word_count_in_text(task_8_some_text, task_8_searching
 print(f'Count of word({task_8_searching_word}) in text: {task_8_result}')
 
 
+# task 9
+def task_9_capitalize_first_word_letters(text):
+    split_text = text.split(' ')
+    for i in range(0, len(split_text)):
+        split_text[i] = split_text[i].capitalize()
+    return ' '.join(split_text)
+
+
+print('\nTASK 9!!!')
+task_9_some_text = 'Computer science, the study of computers and computing, including their theoretical and ' \
+                   'algorithmic foundations, hardware and software, and their uses for processing information.'
+print(f'Text before changes: "{task_9_some_text}"')
+print(f'Text after changes: "{task_9_capitalize_first_word_letters(task_9_some_text)}"')
