@@ -87,3 +87,17 @@ print(f'Text before changes: "{task_6_some_text}"')
 task_6_result = task_6_delete_o(task_6_some_text)
 print(f'Text after changes: {task_6_result[0]}')
 print(f'Count deleted "o" : {task_6_result[1]}')
+
+
+# task 7
+def task_7_delete_o(text):
+    half_text = text[: int(len(text) / 2)]
+    new_text = half_text.replace('п', '*')
+    return new_text
+
+
+print('\nTASK 7!!!')
+task_7_some_text = 'п ввавввап ппп длодлдодлол ** авпвыпп * * * п п п'
+print(f'Text before changes: "{task_7_some_text}"')
+task_7_result = task_7_delete_o(task_7_some_text)
+print(f'Text after changes: {task_7_result}')
