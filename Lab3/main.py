@@ -139,7 +139,7 @@ def task_10_search_words_start_end_letters(text, start_letter, end_letter):
     start_letter = start_letter.upper()
     end_letter = end_letter.upper()
     for i in range(0, len(split_text), 1):
-        if split_text[i][0] == start_letter and split_text[i][len(split_text[i]) - 1] == end_letter:
+        if split_text[i].startswith(start_letter) and split_text[i].endswith(end_letter):
             count_words += 1
         else:
             continue
@@ -157,3 +157,5 @@ if task_10_result > 0:
     print(f'Words that started with {task_10_start_letter} and end with {task_10_end_letter}: {task_10_result}')
 else:
     print('None words found')
+
+
