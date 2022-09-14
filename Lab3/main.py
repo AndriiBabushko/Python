@@ -58,9 +58,9 @@ def task_4_count_a_o(text):
 print('\nTASK 4!!!')
 task_4_some_text = 'a ddgdgdgdgd aa oaoaoaoao fdfgdaaafddfgooo o fgfdg oooaaa'
 print(f'Task 4 text: "{task_4_some_text}"')
-task_4_changes = task_4_count_a_o(task_4_some_text)
-print(f'Count changes from "a" to "o": {task_4_changes[0]}')
-print(f'String length: {task_4_changes[1]}')
+task_4_result = task_4_count_a_o(task_4_some_text)
+print(f'Count changes from "a" to "o": {task_4_result[0]}')
+print(f'String length: {task_4_result[1]}')
 
 
 # task 5
@@ -73,3 +73,17 @@ print('\nTASK 5!!!')
 task_5_some_text = 'FDDFDF sdsdfsf FdHfHkLjNkKgGf FDFDsdsd dfdfDFFDFD'
 print(f'Text before changes: "{task_5_some_text}"')
 print(f'Text after changes: {task_5_change_upper_lower(task_5_some_text)}')
+
+
+# task 6
+def task_6_delete_o(text):
+    new_text = text.replace('o', '')
+    return [new_text, text.count('o')]
+
+
+print('\nTASK 6!!!')
+task_6_some_text = 'a ddgdgdgdgd aa oaoaoaoao fdfgdaaafddfgooo o fgfdg oooaaa'
+print(f'Text before changes: "{task_6_some_text}"')
+task_6_result = task_6_delete_o(task_6_some_text)
+print(f'Text after changes: {task_6_result[0]}')
+print(f'Count deleted "o" : {task_6_result[1]}')
