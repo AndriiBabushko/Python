@@ -16,8 +16,21 @@ def task_1_find_word_in_text(text, searching_letter):
 
 print('\nTASK 1!!!')
 task_1_some_text = 'lorem ipsum lorem Ipsum dolor Dit amet, Consectetur adipiscing elit.'
-print(f'Task 1 text: "{task_1_some_text}>"')
+print(f'Task 1 text: "{task_1_some_text}"')
 task_1_some_searching_letter = str(input('Enter searching letter: '))
 print(f'Count of searching letter({task_1_some_searching_letter}) = '
       f'{task_1_find_word_in_text(task_1_some_text, task_1_some_searching_letter)}')
 
+
+# task 2
+def task_2_change_text(text):
+    count_changes = text.count(':')
+    new_text = text.replace(':', '%')
+    print(f'Text after changes: {new_text}')
+    return count_changes
+
+
+print('\nTASK 1!!!')
+task_2_some_text = ': % % :: %% dfd 1212dffd12121 % :'
+print(f'Task 2 text: "{task_2_some_text}"')
+print(f'Count changes from : to %: {task_2_change_text(task_2_some_text)}')
