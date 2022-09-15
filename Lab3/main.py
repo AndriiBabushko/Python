@@ -160,12 +160,12 @@ else:
 
 
 # task 11
-def task_11_search_words_start_end_letters(text):
+def task_11_count_vowels(text):
     count_vowels = 0
     lower_text = text.lower()
     vowels = {'a', 'e', 'i', 'o', 'u'}
-    for char in lower_text:
-        if char in vowels:
+    for string in lower_text:
+        if string in vowels:
             count_vowels += 1
 
     return count_vowels
@@ -176,8 +176,34 @@ task_11_some_text = 'Computer science, the study of computers and computing, inc
                     'algorithmic foundations, hardware and software, and their uses for processing information.'
 print(f'Text for task 11: "{task_11_some_text}"')
 
-task_11_result = task_11_search_words_start_end_letters(task_11_some_text)
+task_11_result = task_11_count_vowels(task_11_some_text)
 if task_11_result > 0:
     print(f'Count of vowels: {task_11_result}')
 else:
     print('No vowels found')
+
+
+# task 12
+def task_12_count_consonant(text):
+    count_consonant = 0
+    lower_text = text.lower()
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+    for string in lower_text:
+        if string in vowels:
+            continue
+        else:
+            count_consonant += 1
+
+    return count_consonant
+
+
+print('\nTASK 12!!!')
+task_12_some_text = 'Computer science, the study of computers and computing, including their theoretical and ' \
+                    'algorithmic foundations, hardware and software, and their uses for processing information.'
+print(f'Text for task 12: "{task_12_some_text}"')
+
+task_12_result = task_12_count_consonant(task_12_some_text)
+if task_12_result > 0:
+    print(f'Count of consonants: {task_12_result}')
+else:
+    print('No consonants found')
