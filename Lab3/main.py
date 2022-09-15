@@ -207,3 +207,34 @@ if task_12_result > 0:
     print(f'Count of consonants: {task_12_result}')
 else:
     print('No consonants found')
+
+
+# task 13
+def task_13_count_names(text):
+    count_names = 0
+    split_text_by_dot = text.split('. ')
+    for sentence in split_text_by_dot:
+        for index in range(0, len(sentence)):
+            if sentence[index].isupper():
+                count_names += 1
+            else:
+                continue
+
+    return count_names
+
+
+print('\nTASK 13!!!')
+task_13_some_text = 'When I enrolled in graduate school, things began to change. The registrar insisted that \n' \
+                    'my email address and placard match the spelling of my name on my passport. For the first time' \
+                    ' since \ngrade school, my name in the classroom was Roxani again. I couldn’t quite correct ' \
+                    'my professors; \nRoxani was my name, after all, so I began to lead a bit of a double life. ' \
+                    'I introduced myself \nas Roxanne — the only name I had ever called myself in English, and' \
+                    ' a name most everyone could \npronounce. Roxani was reserved for Greece — for childhood,' \
+                    ' parents, and a different self.'
+print(f'Text for task 13:\n"{task_13_some_text}"')
+
+task_13_result = task_13_count_names(task_13_some_text)
+if task_13_result > 0:
+    print(f'Count of names: {task_13_result}')
+else:
+    print('No names found')
