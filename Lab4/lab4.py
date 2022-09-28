@@ -19,9 +19,11 @@ def enter_some_list():
 
 
 print('\nTASK 1!!!')
-task_1_list = enter_some_list()
-print(f'Entered list: {task_1_list}')
-print(f'Reversed list: {task_1_output_reverse_list(task_1_list)}')
+
+
+# task_1_list = enter_some_list()
+# print(f'Entered list: {task_1_list}')
+# print(f'Reversed list: {task_1_output_reverse_list(task_1_list)}')
 
 
 # task 2
@@ -37,18 +39,43 @@ def task_2_get_positive_negative_lists(someList):
 
 
 print('\nTASK 2!!!')
-task_2_list = enter_some_list();
-print(f'Entered list: {task_2_list}')
-print(f'Positive list: {task_2_get_positive_negative_lists(task_2_list)[0]}')
-print(f'Negative list: {task_2_get_positive_negative_lists(task_2_list)[1]}')
+
+
+# task_2_list = enter_some_list()
+# print(f'Entered list: {task_2_list}')
+# print(f'Positive list: {task_2_get_positive_negative_lists(task_2_list)[0]}')
+# print(f'Negative list: {task_2_get_positive_negative_lists(task_2_list)[1]}')
 
 
 # task 3
-def task_3():
-    return
+def task_3_get_index_odd_sum_list(someList):
+    odd_sum = 0
+
+    for i in range(0, len(someList)):
+        if i % 2 != 0:
+            odd_sum += someList[i]
+
+    return odd_sum
+
+
+def get_random_float_number(minRandom, maxRandom):
+    import random as random
+    return round((random.random() * (maxRandom - minRandom) + minRandom), 2)
+
+
+def create_random_float_list(minRandom, maxRandom):
+    newList = []
+
+    for i in range(0, 20):
+        newList.append(get_random_float_number(minRandom, maxRandom))
+
+    return newList
 
 
 print('\nTASK 3!!!')
+task_3_list = create_random_float_list(-5, 5)
+print(f'Generated list: {task_3_list}')
+print(f'Sum of odd numbers: {task_3_get_index_odd_sum_list(task_3_list)}')
 
 
 # task 4
