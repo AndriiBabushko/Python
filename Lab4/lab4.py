@@ -154,11 +154,31 @@ print(f'New list with squared numbers lower than max:\n{task_6_get_squares_list_
 
 
 # task 7
-def task_7():
-    return
+def task_7_get_min_abs_elem(some_list):
+    return abs(min(some_list))
+
+
+def create_random_int_float_list(n, min_random, max_random):
+    import random as random
+
+    new_list = []
+    bools = [True, False]
+
+    for i in range(0, n):
+        bool_type = bools[random.randint(0, 1)]
+        if bool_type:
+            new_list.append(get_random_int_number(min_random, max_random))
+        else:
+            new_list.append(get_random_float_number(min_random, max_random))
+
+    new_list.sort()
+    return new_list
 
 
 print('\nTASK 7!!!')
+task_7_list = create_random_int_float_list(5, -100, 100)
+print(f'Generated list: {task_7_list}')
+print(f'Min abs element in list: {task_7_get_min_abs_elem(task_7_list)}')
 
 
 # task 8
