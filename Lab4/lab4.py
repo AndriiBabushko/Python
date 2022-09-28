@@ -176,14 +176,31 @@ def create_random_int_float_list(n, min_random, max_random):
 
 
 print('\nTASK 7!!!')
-task_7_list = create_random_int_float_list(5, -100, 100)
+task_7_list = create_random_int_float_list(30, -100, 100)
 print(f'Generated list: {task_7_list}')
 print(f'Min abs element in list: {task_7_get_min_abs_elem(task_7_list)}')
 
 
 # task 8
-def task_8():
-    return
+def task_8_create_3_lists_of_10_elems(some_list):
+    for i in range(0, len(some_list)):
+        some_list[i] = abs(some_list[i])
+
+    print(some_list)
+    first_10_elems = some_list[:10]
+    first_10_elems.sort()
+    second_10_elems = some_list[10:20]
+    second_10_elems.sort()
+    third_10_elems = some_list[20:30]
+    third_10_elems.sort()
+
+    return [first_10_elems, second_10_elems, third_10_elems]
 
 
 print('\nTASK 8!!!')
+task_8_list = create_random_int_float_list(30, -100, 100)
+print(f'Generated list: {task_8_list}')
+three_lists_of_10_elems = task_8_create_3_lists_of_10_elems(task_8_list)
+print(f'First 10 elems: {three_lists_of_10_elems[0]}')
+print(f'Second 10 elems: {three_lists_of_10_elems[1]}')
+print(f'Third 10 elems: {three_lists_of_10_elems[2]}')
