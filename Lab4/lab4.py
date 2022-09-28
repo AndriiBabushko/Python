@@ -135,11 +135,22 @@ task_5_get_negative_pairs(task_5_list)
 
 
 # task 6
-def task_6():
-    return
+def task_6_get_squares_list_lower_than_max(some_list):
+    squares_list = []
+    max_number = max(some_list)
+
+    for number in some_list:
+        if number < max_number:
+            squares_list.append(number ** 2)
+
+    squares_list.sort(reverse=True)
+    return squares_list
 
 
 print('\nTASK 6!!!')
+task_6_list = create_random_int_list(5, -100, 100)
+print(f'Generated list: {task_6_list}')
+print(f'New list with squared numbers lower than max:\n{task_6_get_squares_list_lower_than_max(task_6_list)}')
 
 
 # task 7
