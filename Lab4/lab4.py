@@ -79,10 +79,6 @@ print(f'Sum of odd numbers: {task_3_get_index_odd_sum_list(task_3_list)}')
 
 
 # task 4
-def task_4():
-    return
-
-
 def get_max_elem_list(some_list):
     return max(some_list)
 
@@ -102,10 +98,10 @@ def create_random_int_list(n, min_random, max_random):
     for i in range(0, n):
         new_list.append(get_random_int_number(min_random, max_random))
 
-    return
+    return new_list
 
 
-def get_sorted_odd_list(some_list):
+def task_5_get_sorted_odd_list(some_list):
     odd_number_list = []
 
     for number in some_list:
@@ -117,18 +113,25 @@ def get_sorted_odd_list(some_list):
 
 
 print('\nTASK 4!!!')
-task_4_list = create_random_float_list(30, -100, 100)
+task_4_list = create_random_int_list(30, -100, 100)
 print(f'Generated list: {task_4_list}')
 print(f'Max value {get_max_elem_list(task_4_list)} found in index {get_max_index_list(task_4_list)}')
-print(f'Odd reverse sorted list: {get_sorted_odd_list(task_4_list)}')
+print(f'Odd reverse sorted list: {task_5_get_sorted_odd_list(task_4_list)}')
 
 
 # task 5
-def task_5():
-    return
+def task_5_get_negative_pairs(some_list):
+    negative_pairs_counter = 0
+    for i in range(0, len(some_list) - 1):
+        if some_list[i] < 0 and some_list[i + 1] < 0:
+            negative_pairs_counter += 1
+            print(f'{negative_pairs_counter}) {some_list[i]} in {i} and {some_list[i + 1]} in {i + 1}')
 
 
 print('\nTASK 5!!!')
+task_5_list = create_random_int_list(30, -100, 100)
+print(f'Generated list: {task_5_list}')
+task_5_get_negative_pairs(task_5_list)
 
 
 # task 6
