@@ -20,16 +20,27 @@ def enter_some_list():
 
 print('\nTASK 1!!!')
 task_1_list = enter_some_list()
-print(f'Entered array: {task_1_list}')
+print(f'Entered list: {task_1_list}')
 print(f'Reversed list: {task_1_output_reverse_list(task_1_list)}')
 
 
 # task 2
-def task_2():
-    return
+def task_2_get_positive_negative_lists(someList):
+    positive_list = []
+    negative_list = []
+    for number in someList:
+        if number >= 0:
+            positive_list.append(number)
+        else:
+            negative_list.append(number)
+    return [positive_list, negative_list]
 
 
 print('\nTASK 2!!!')
+task_2_list = enter_some_list();
+print(f'Entered list: {task_2_list}')
+print(f'Positive list: {task_2_get_positive_negative_lists(task_2_list)[0]}')
+print(f'Negative list: {task_2_get_positive_negative_lists(task_2_list)[1]}')
 
 
 # task 3
