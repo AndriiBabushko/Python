@@ -63,17 +63,17 @@ def get_random_float_number(minRandom, maxRandom):
     return round((random.random() * (maxRandom - minRandom) + minRandom), 2)
 
 
-def create_random_float_list(minRandom, maxRandom):
+def create_random_float_list(n, minRandom, maxRandom):
     newList = []
 
-    for i in range(0, 20):
+    for i in range(0, n):
         newList.append(get_random_float_number(minRandom, maxRandom))
 
     return newList
 
 
 print('\nTASK 3!!!')
-task_3_list = create_random_float_list(-5, 5)
+task_3_list = create_random_float_list(20, -5, 5)
 print(f'Generated list: {task_3_list}')
 print(f'Sum of odd numbers: {task_3_get_index_odd_sum_list(task_3_list)}')
 
@@ -83,7 +83,44 @@ def task_4():
     return
 
 
+def get_max_elem_list(some_list):
+    return max(some_list)
+
+
+def get_max_index_list(some_list):
+    return some_list.index(max(some_list))
+
+
+def get_random_int_number(min_random, max_random):
+    import random as random
+    return round((random.random() * (max_random - min_random) + min_random))
+
+
+def create_random_int_list(n, min_random, max_random):
+    new_list = []
+
+    for i in range(0, n):
+        new_list.append(get_random_int_number(min_random, max_random))
+
+    return
+
+
+def get_sorted_odd_list(some_list):
+    odd_number_list = []
+
+    for number in some_list:
+        if number % 2 != 0:
+            odd_number_list.append(number)
+
+    odd_number_list.sort(reverse=True)
+    return odd_number_list
+
+
 print('\nTASK 4!!!')
+task_4_list = create_random_float_list(30, -100, 100)
+print(f'Generated list: {task_4_list}')
+print(f'Max value {get_max_elem_list(task_4_list)} found in index {get_max_index_list(task_4_list)}')
+print(f'Odd reverse sorted list: {get_sorted_odd_list(task_4_list)}')
 
 
 # task 5
