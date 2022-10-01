@@ -147,26 +147,73 @@ def enter_some_point(point):
 
 
 print('\nTASK 3!!!')
-counter_point_in_circle = 0
-counter_point_out_of_circle = 0
-task_3_circle_center_and_radius = enter_circle_center_points_and_radius()
-print(f'Center point O({task_3_circle_center_and_radius[0]}, {task_3_circle_center_and_radius[1]}).'
-      f' Radius: {task_3_circle_center_and_radius[2]}')
 
-for i in range(0, 3):
-    task_3_some_point = enter_some_point(i)
-    if check_if_point_is_in_circle(task_3_some_point, task_3_circle_center_and_radius):
-        counter_point_in_circle += 1
-    else:
-        counter_point_out_of_circle += 1
 
-print(f'Count of points which are in circle: {counter_point_in_circle}')
-print(f'Count of points which are out of circle: {counter_point_out_of_circle}')
+# counter_point_in_circle = 0
+# counter_point_out_of_circle = 0
+# task_3_circle_center_and_radius = enter_circle_center_points_and_radius()
+# print(f'Center point O({task_3_circle_center_and_radius[0]}, {task_3_circle_center_and_radius[1]}).'
+#       f' Radius: {task_3_circle_center_and_radius[2]}')
+# for i in range(0, 3):
+#     task_3_some_point = enter_some_point(i)
+#     if check_if_point_is_in_circle(task_3_some_point, task_3_circle_center_and_radius):
+#         counter_point_in_circle += 1
+#     else:
+#         counter_point_out_of_circle += 1
+#
+# print(f'Count of points which are in circle: {counter_point_in_circle}')
+# print(f'Count of points which are out of circle: {counter_point_out_of_circle}')
 
 
 # task 4
+def enter_quadrangle_data():
+    from math import sqrt
+    quadrangle = {
+        'x': 0,
+        'y': 0,
+        'z': 0,
+        't': 0,
+        'diagonal': 0
+    }
+
+    while True:
+        try:
+            quadrangle['x'] = float(input('Enter x: '))
+            quadrangle['y'] = float(input('Enter y: '))
+            quadrangle['z'] = float(input('Enter z: '))
+            quadrangle['t'] = float(input('Enter t: '))
+            quadrangle['diagonal'] = sqrt(quadrangle['x'] ** 2 + quadrangle['y'] ** 2)
+            if quadrangle['x'] < 0 or quadrangle['y'] < 0 or quadrangle['z'] < 0 or quadrangle['t'] < 0:
+                raise ValueError(f'Some side length is less than 0!')
+            else:
+                pass
+                print('Sides length were entered correctly!')
+                break
+        except ValueError as value_error:
+            print('ERROR:', value_error)
+
+    return quadrangle
+
+
+def get_first_square(x, y):
+    return x * y * 0.5
+
+
+def get_second_square(d, z, t):
+    from math import sqrt
+
+    p = (z + t + d) / 2
+
+    return sqrt(p * (p - z) * (p - t) * (p - d))
+
 
 print('\nTASK 4!!!')
+task_4_quadrangle = enter_quadrangle_data()
+task_4_square_of_quadrangle = round(
+    get_first_square(task_4_quadrangle['x'], task_4_quadrangle['y']) +
+    get_second_square(task_4_quadrangle['diagonal'], task_4_quadrangle['z'], task_4_quadrangle['t'])
+    , 2)
+print(f'Square of quadrangle: {task_4_square_of_quadrangle}')
 
 # task 5
 
