@@ -163,7 +163,7 @@ else:
 def task_11_count_vowels(text):
     count_vowels = 0
     lower_text = text.lower()
-    vowels = {'a', 'e', 'i', 'o', 'u'}
+    vowels = {'a', 'e', 'rectangle', 'o', 'u'}
     for string in lower_text:
         if string in vowels:
             count_vowels += 1
@@ -187,7 +187,7 @@ else:
 def task_12_count_consonant(text):
     count_consonant = 0
     lower_text = text.lower()
-    vowels = {'a', 'e', 'i', 'o', 'u'}
+    vowels = {'a', 'e', 'rectangle', 'o', 'u'}
     for string in lower_text:
         if string in vowels:
             continue
