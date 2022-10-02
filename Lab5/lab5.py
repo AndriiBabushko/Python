@@ -1,3 +1,5 @@
+from time import perf_counter
+
 """ Lab 5. Python. Andrii Babushko. Repository: https://github.com/AndriiBabushko/Python """
 
 
@@ -103,10 +105,6 @@ def check_if_point_is_in_circle(checked_point, circle_points_and_radius):
 
 
 def enter_circle_center_points_and_radius():
-    point_a = 0
-    point_b = 0
-    circle_radius = 0
-
     while True:
         try:
             point_a = float(input(f'Enter circle center point a: '))
@@ -220,7 +218,6 @@ print('\nTASK 4!!!')
 
 # task 5
 def task_5_get_natural_numbers(n):
-    from math import inf
     natural_numbers = []
 
     for number in range(1, n + 1):
@@ -231,8 +228,6 @@ def task_5_get_natural_numbers(n):
 
 
 def enter_n():
-    n = 0
-
     while True:
         try:
             n = int(input('Enter n: '))
@@ -249,8 +244,6 @@ def enter_n():
 
 
 def enter_count_checked_numbers():
-    count_checked_numbers = 1
-
     while True:
         try:
             count_checked_numbers = int(input('How much do you want to check natural numbers? '))
@@ -277,7 +270,16 @@ print('\nTASK 5!!!')
 
 
 # task 6
-def task_6_get_numbers_with_large_number_of_divisors(M, N):
+def task_6_numbers_with_large_number_of_divisors():
+    M_N_interval = enter_M_N_interval()
+    print(f'[M, N] interval: {M_N_interval}')
+    M = M_N_interval[0]
+    N = M_N_interval[1]
+    numbers_with_large_number_of_divisors = get_numbers_with_large_number_of_divisors(M, N)
+    print(f'Dictionary of numbers with large number of divisors: {numbers_with_large_number_of_divisors}')
+
+
+def get_numbers_with_large_number_of_divisors(M, N):
     numbers_with_large_number_of_divisors = {}
 
     for number in range(M, N):
@@ -297,9 +299,6 @@ def task_6_get_numbers_with_large_number_of_divisors(M, N):
 
 
 def enter_M_N_interval():
-    M = 0
-    N = 0
-
     while True:
         try:
             M = int(input('Enter started M point of interval: '))
@@ -319,18 +318,18 @@ def enter_M_N_interval():
 print('\nTASK 6!!!')
 
 
-# task_6_M_N_interval = enter_M_N_interval()
-# print(f'[M, N] interval: {task_6_M_N_interval}')
-# task_6_M = task_6_M_N_interval[0]
-# task_6_N = task_6_M_N_interval[1]
-# task_6_numbers_with_large_number_of_divisors = task_6_get_numbers_with_large_number_of_divisors(task_6_M, task_6_N)
-# print(f'Dictionary of numbers with large number of divisors: {task_6_numbers_with_large_number_of_divisors}')
+# task_6_numbers_with_large_number_of_divisors()
 
 
 # task 7
-def task_7_output_result_in_appropriate_format(N):
-    format_for_output = 0
+def task_7_result_in_appropriate_format():
+    task_7_n = enter_n()
+    print(f'Entered N: {task_7_n}')
+    task_7_entered_format = enter_format()
+    output_result_in_appropriate_format(task_7_n, task_7_entered_format)
 
+
+def enter_format():
     while True:
         try:
             print(f'Ways for output result: "list", "by strings", "count primes"')
@@ -344,7 +343,11 @@ def task_7_output_result_in_appropriate_format(N):
         except ValueError as value_err:
             print(f'ERROR: {value_err}')
 
-    if format_for_output == 'list':
+    return format_for_output
+
+
+def output_result_in_appropriate_format(N, some_format):
+    if some_format == 'list':
         output_primary_list = []
 
         for number in range(0, N):
@@ -352,7 +355,7 @@ def task_7_output_result_in_appropriate_format(N):
                 output_primary_list.append(number)
 
         print(f'List of primary numbers: {output_primary_list}')
-    elif format_for_output == 'by strings':
+    elif some_format == 'by strings':
         output_string = 'Primary numbers:\n'
         counter = 1
 
@@ -383,17 +386,32 @@ def is_prime(number):
 print('\nTASK 7!!!')
 
 
-# task_7_n = enter_n()
-# print(f'Entered N: {task_7_n}')
-# task_7_output_result_in_appropriate_format(task_7_n)
+# task_7_result_in_appropriate_format()
 
 
 # task 8
-def task_8_get_new_list_from_another(some_list):
-    new_list = []
-    min_number = min(some_list)
-    max_number = max(some_list)
+def task_8_new_list_from_another():
+    task_8_created_random_int_list = create_random_integers_list(get_random_int_number(10, 25))
+    print(f'New created list: {task_8_created_random_int_list}')
+    min_number = min(task_8_created_random_int_list)
+    max_number = max(task_8_created_random_int_list)
+    bottom_and_upper = get_bottom_and_upper(min_number, max_number)
+    task_8_new_list_from_created_list = get_new_list_from_another(task_8_created_random_int_list, min_number,
+                                                                  max_number, bottom_and_upper[0], bottom_and_upper[1])
+    print(f'New list from recently created one: {task_8_new_list_from_created_list}')
 
+
+def get_new_list_from_another(some_list, min_number, max_number, bottom, upper):
+    new_list = []
+
+    for number in some_list:
+        if min_number + bottom <= number <= max_number - upper:
+            new_list.append(number)
+
+    return new_list
+
+
+def get_bottom_and_upper(min_number, max_number):
     while True:
         try:
             bottom = int(input('Enter bottom value: '))
@@ -411,11 +429,7 @@ def task_8_get_new_list_from_another(some_list):
         except ValueError as value_err:
             print(f'ERROR: {value_err}')
 
-    for number in some_list:
-        if min_number + bottom <= number <= max_number - upper:
-            new_list.append(number)
-
-    return new_list
+    return [bottom, upper]
 
 
 def get_random_int_number(min_random, max_random):
@@ -433,11 +447,54 @@ def create_random_integers_list(count_integers):
 
 
 print('\nTASK 8!!!')
-task_8_created_random_int_list = create_random_integers_list(get_random_int_number(10, 25))
-print(f'New created list: {task_8_created_random_int_list}')
-task_8_new_list_from_created_list = task_8_get_new_list_from_another(task_8_created_random_int_list)
-print(f'New list from recently created one: {task_8_new_list_from_created_list}')
+# task_8_new_list_from_another()
+
 
 # task 9
 
+
+def task_9_task_6_decorator(n, task_6_func):
+    print('\nLaunch time check decorator of task 6!')
+    for i in range(1, 7, n):
+        time_started = perf_counter()
+        for repeat in range(1, 10 ** i):
+            task_6_func(get_random_int_number(0, 500), get_random_int_number(500, 1000))
+        time_finished = perf_counter()
+        time = time_finished - time_started
+        print(f'Time of executing function {10 ** i} times: {round(time, 5)} sec.')
+
+
+def task_9_task_7_decorator(n, task_7_func):
+    print('\nLaunch time check decorator of task 7!')
+    for i in range(1, 7, n):
+        time_started = perf_counter()
+        for repeat in range(1, 10 ** i):
+            n = get_random_int_number(1, 100)
+            formats = ['list', 'count primes']
+            entered_format = formats[get_random_int_number(0, 1)]
+            task_7_func(n, entered_format)
+        time_finished = perf_counter()
+        time = time_finished - time_started
+        print(f'Time of executing function {10 ** i} times: {round(time, 5)} sec.')
+
+
+def task_9_task_8_decorator(n, task_8_func):
+    print('\nLaunch time check decorator of task 8!')
+    for i in range(1, 7, n):
+        time_started = perf_counter()
+        for repeat in range(1, 10 ** i):
+            created_random_int_list = create_random_integers_list(get_random_int_number(10, 25))
+            min_number = min(created_random_int_list)
+            max_number = max(created_random_int_list)
+            bottom = get_random_int_number(min_number, int(max_number / 2))
+            upper = get_random_int_number(min_number, int(max_number / 2))
+            task_8_func(created_random_int_list, min_number, max_number, bottom, upper)
+        time_finished = perf_counter()
+        time = time_finished - time_started
+        print(f'Time of executing function {10 ** i} times: {round(time, 5)} sec.')
+
+
 print('\nTASK 9!!!')
+task_9_task_6_decorator(6, get_numbers_with_large_number_of_divisors)
+task_9_task_7_decorator(6, output_result_in_appropriate_format)
+task_9_task_8_decorator(6, get_new_list_from_another)
