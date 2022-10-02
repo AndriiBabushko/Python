@@ -317,6 +317,8 @@ def enter_M_N_interval():
 
 
 print('\nTASK 6!!!')
+
+
 # task_6_M_N_interval = enter_M_N_interval()
 # print(f'[M, N] interval: {task_6_M_N_interval}')
 # task_6_M = task_6_M_N_interval[0]
@@ -379,13 +381,62 @@ def is_prime(number):
 
 
 print('\nTASK 7!!!')
-task_7_n = enter_n()
-print(f'Entered N: {task_7_n}')
-task_7_output_result_in_appropriate_format(task_7_n)
+
+
+# task_7_n = enter_n()
+# print(f'Entered N: {task_7_n}')
+# task_7_output_result_in_appropriate_format(task_7_n)
+
 
 # task 8
+def task_8_get_new_list_from_another(some_list):
+    new_list = []
+    min_number = min(some_list)
+    max_number = max(some_list)
+
+    while True:
+        try:
+            bottom = int(input('Enter bottom value: '))
+            upper = int(input('Enter upper value: '))
+            if min_number + bottom > max_number:
+                raise ValueError(f'Min + bottom({min_number + bottom}) > Max({max_number})')
+            elif max_number - upper < min_number:
+                raise ValueError(f'Max + upper({max_number + upper}) < Min({min_number})')
+            elif bottom != int(bottom) and upper != int(upper):
+                raise ValueError(f'Bottom or upper is float number!')
+            else:
+                pass
+                print('Numbers were entered correctly!')
+                break
+        except ValueError as value_err:
+            print(f'ERROR: {value_err}')
+
+    for number in some_list:
+        if min_number + bottom <= number <= max_number - upper:
+            new_list.append(number)
+
+    return new_list
+
+
+def get_random_int_number(min_random, max_random):
+    import random as random
+    return round((random.random() * (max_random - min_random) + min_random))
+
+
+def create_random_integers_list(count_integers):
+    created_list = []
+
+    for counter in range(0, count_integers):
+        created_list.append(get_random_int_number(1, 999))
+
+    return created_list
+
 
 print('\nTASK 8!!!')
+task_8_created_random_int_list = create_random_integers_list(get_random_int_number(10, 25))
+print(f'New created list: {task_8_created_random_int_list}')
+task_8_new_list_from_created_list = task_8_get_new_list_from_another(task_8_created_random_int_list)
+print(f'New list from recently created one: {task_8_new_list_from_created_list}')
 
 # task 9
 
