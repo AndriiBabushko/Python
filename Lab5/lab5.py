@@ -317,16 +317,71 @@ def enter_M_N_interval():
 
 
 print('\nTASK 6!!!')
-task_6_M_N_interval = enter_M_N_interval()
-print(f'[M, N] interval: {task_6_M_N_interval}')
-task_6_M = task_6_M_N_interval[0]
-task_6_N = task_6_M_N_interval[1]
-task_6_numbers_with_large_number_of_divisors = task_6_get_numbers_with_large_number_of_divisors(task_6_M, task_6_N)
-print(f'Dictionary of numbers with large number of divisors: {task_6_numbers_with_large_number_of_divisors}')
+# task_6_M_N_interval = enter_M_N_interval()
+# print(f'[M, N] interval: {task_6_M_N_interval}')
+# task_6_M = task_6_M_N_interval[0]
+# task_6_N = task_6_M_N_interval[1]
+# task_6_numbers_with_large_number_of_divisors = task_6_get_numbers_with_large_number_of_divisors(task_6_M, task_6_N)
+# print(f'Dictionary of numbers with large number of divisors: {task_6_numbers_with_large_number_of_divisors}')
+
 
 # task 7
+def task_7_output_result_in_appropriate_format(N):
+    format_for_output = 0
+
+    while True:
+        try:
+            print(f'Ways for output result: "list", "by strings", "count primes"')
+            format_for_output = str(input('Enter one of the variants of output here: '))
+            if format_for_output != 'list' and format_for_output != 'by strings' and format_for_output != 'count primes':
+                raise ValueError('Format was entered incorrectly!')
+            else:
+                pass
+                print('Format was entered correctly!')
+                break
+        except ValueError as value_err:
+            print(f'ERROR: {value_err}')
+
+    if format_for_output == 'list':
+        output_primary_list = []
+
+        for number in range(0, N):
+            if is_prime(number):
+                output_primary_list.append(number)
+
+        print(f'List of primary numbers: {output_primary_list}')
+    elif format_for_output == 'by strings':
+        output_string = 'Primary numbers:\n'
+        counter = 1
+
+        for number in range(0, N):
+            if is_prime(number):
+                output_string += f'{counter}) {number}\n'
+                counter += 1
+
+        print(f'{output_string}')
+    else:
+        counter = 0
+
+        for number in range(0, N):
+            if is_prime(number):
+                counter += 1
+
+        print(f'Total count of primary numbers in interval [0, N]: {counter}')
+
+
+def is_prime(number):
+    for delimiter in range(2, (number // 2) + 1):
+        if number % delimiter == 0:
+            return False
+
+    return True
+
 
 print('\nTASK 7!!!')
+task_7_n = enter_n()
+print(f'Entered N: {task_7_n}')
+task_7_output_result_in_appropriate_format(task_7_n)
 
 # task 8
 
