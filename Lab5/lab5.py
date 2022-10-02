@@ -208,16 +208,68 @@ def get_second_square(d, z, t):
 
 
 print('\nTASK 4!!!')
-task_4_quadrangle = enter_quadrangle_data()
-task_4_square_of_quadrangle = round(
-    get_first_square(task_4_quadrangle['x'], task_4_quadrangle['y']) +
-    get_second_square(task_4_quadrangle['diagonal'], task_4_quadrangle['z'], task_4_quadrangle['t'])
-    , 2)
-print(f'Square of quadrangle: {task_4_square_of_quadrangle}')
+# task_4_quadrangle = enter_quadrangle_data()
+# task_4_square_of_quadrangle = round(
+#     get_first_square(task_4_quadrangle['x'], task_4_quadrangle['y']) +
+#     get_second_square(task_4_quadrangle['diagonal'], task_4_quadrangle['z'], task_4_quadrangle['t'])
+#     , 2)
+# print(f'Square of quadrangle: {task_4_square_of_quadrangle}')
+
 
 # task 5
+def task_5_get_natural_numbers(n):
+    from math import inf
+    natural_numbers = []
+
+    for number in range(1, n + 1):
+        if n % number == 0:
+            natural_numbers.append(number)
+
+    return natural_numbers
+
+
+def enter_n():
+    n = 0
+
+    while True:
+        try:
+            n = int(input('Enter n: '))
+            if n > 0:
+                pass
+                print('Number "n" was entered correctly!')
+                break
+            else:
+                raise ValueError(f'Number is less than 0!')
+        except ValueError as value_error:
+            print('ERROR:', value_error)
+
+    return n
+
+
+def enter_count_checked_numbers():
+    count_checked_numbers = 1
+
+    while True:
+        try:
+            count_checked_numbers = int(input('How much do you want to check natural numbers? '))
+            if count_checked_numbers >= 1:
+                pass
+                break
+            else:
+                raise ValueError(f'Number is less than 0!')
+        except ValueError as value_error:
+            print('ERROR:', value_error)
+
+    return count_checked_numbers
+
 
 print('\nTASK 5!!!')
+task_5_count_checked_numbers = enter_count_checked_numbers()
+for i in range(0, task_5_count_checked_numbers):
+    task_5_n = enter_n()
+    print(f'{i + 1}) Entered N = {task_5_n}')
+    task_5_natural_numbers = task_5_get_natural_numbers(task_5_n)
+    print(f'List of natural numbers: {task_5_natural_numbers}')
 
 # task 6
 
