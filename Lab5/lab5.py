@@ -208,6 +208,8 @@ def get_second_square(d, z, t):
 
 
 print('\nTASK 4!!!')
+
+
 # task_4_quadrangle = enter_quadrangle_data()
 # task_4_square_of_quadrangle = round(
 #     get_first_square(task_4_quadrangle['x'], task_4_quadrangle['y']) +
@@ -264,16 +266,63 @@ def enter_count_checked_numbers():
 
 
 print('\nTASK 5!!!')
-task_5_count_checked_numbers = enter_count_checked_numbers()
-for i in range(0, task_5_count_checked_numbers):
-    task_5_n = enter_n()
-    print(f'{i + 1}) Entered N = {task_5_n}')
-    task_5_natural_numbers = task_5_get_natural_numbers(task_5_n)
-    print(f'List of natural numbers: {task_5_natural_numbers}')
+
+
+# task_5_count_checked_numbers = enter_count_checked_numbers()
+# for i in range(0, task_5_count_checked_numbers):
+#     task_5_n = enter_n()
+#     print(f'{i + 1}) Entered N = {task_5_n}')
+#     task_5_natural_numbers = task_5_get_natural_numbers(task_5_n)
+#     print(f'List of natural numbers: {task_5_natural_numbers}')
+
 
 # task 6
+def task_6_get_numbers_with_large_number_of_divisors(M, N):
+    numbers_with_large_number_of_divisors = {}
+
+    for number in range(M, N):
+        counter = 0
+        for divisor in range(1, N):
+            if number % divisor == 0:
+                counter += 1
+        numbers_with_large_number_of_divisors.update({number: counter})
+
+    values_list_of_dictionary = numbers_with_large_number_of_divisors.values()
+    max_counter_from_list = max(values_list_of_dictionary)
+
+    number_with_max_divisors = {i for i in numbers_with_large_number_of_divisors if
+                                numbers_with_large_number_of_divisors[i] == max_counter_from_list}
+
+    return number_with_max_divisors
+
+
+def enter_M_N_interval():
+    M = 0
+    N = 0
+
+    while True:
+        try:
+            M = int(input('Enter started M point of interval: '))
+            N = int(input('Enter finished N point of interval: '))
+            if M >= N:
+                raise ValueError(f'M is greater than N!')
+            else:
+                pass
+                print('Points of interval were entered correctly!')
+                break
+        except ValueError as value_err:
+            print(f'ERROR: {value_err}')
+
+    return [M, N]
+
 
 print('\nTASK 6!!!')
+task_6_M_N_interval = enter_M_N_interval()
+print(f'[M, N] interval: {task_6_M_N_interval}')
+task_6_M = task_6_M_N_interval[0]
+task_6_N = task_6_M_N_interval[1]
+task_6_numbers_with_large_number_of_divisors = task_6_get_numbers_with_large_number_of_divisors(task_6_M, task_6_N)
+print(f'Dictionary of numbers with large number of divisors: {task_6_numbers_with_large_number_of_divisors}')
 
 # task 7
 
