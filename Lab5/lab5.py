@@ -1,4 +1,5 @@
 from time import perf_counter
+from random import randint
 
 """ Lab 5. Python. Andrii Babushko. Repository: https://github.com/AndriiBabushko/Python """
 
@@ -35,13 +36,11 @@ def enter_rectangles_sides(counter):
 
 
 print('\nTASK 1!!!')
-
-
-# task_1_rectangles_sides = enter_rectangles_sides(3)
-# print(f'List of rectangles sides: {task_1_rectangles_sides}')
-# task_1_rectangles_areas = task_1_get_rectangles_areas(task_1_rectangles_sides)
-# for rectangle in range(0, len(task_1_rectangles_areas)):
-#     print(f'{rectangle + 1} rectangle\'s area: {task_1_rectangles_areas[rectangle]}')
+task_1_rectangles_sides = enter_rectangles_sides(3)
+print(f'List of rectangles sides: {task_1_rectangles_sides}')
+task_1_rectangles_areas = task_1_get_rectangles_areas(task_1_rectangles_sides)
+for rectangle in range(0, len(task_1_rectangles_areas)):
+    print(f'{rectangle + 1} rectangle\'s area: {task_1_rectangles_areas[rectangle]}')
 
 
 # task 2
@@ -84,12 +83,10 @@ def compare_hypotenuses(hypotenuses):
 
 
 print('\nTASK 2!!!')
-
-
-# task_2_right_triangles_legs = enter_right_triangles_legs(2)
-# print(f'List of right triangle legs: {task_2_right_triangles_legs}')
-# task_2_hypotenuses = task_2_get_right_triangles_hypotenuses(task_2_right_triangles_legs)
-# compare_hypotenuses(task_2_hypotenuses)
+task_2_right_triangles_legs = enter_right_triangles_legs(2)
+print(f'List of right triangle legs: {task_2_right_triangles_legs}')
+task_2_hypotenuses = task_2_get_right_triangles_hypotenuses(task_2_right_triangles_legs)
+compare_hypotenuses(task_2_hypotenuses)
 
 
 # task 3
@@ -97,8 +94,6 @@ def check_if_point_is_in_circle(checked_point, circle_points_and_radius):
     equation = (checked_point[0] - circle_points_and_radius[0]) ** 2 + (
             checked_point[1] - circle_points_and_radius[1]) ** 2
 
-    # print(f'Radius ^2: {circle_points_and_radius[2] ** 2}')
-    # print(f'Equation: {equation}')
     if (circle_points_and_radius[2] ** 2) == equation:
         return True
     return False
@@ -145,22 +140,20 @@ def enter_some_point(point):
 
 
 print('\nTASK 3!!!')
+counter_point_in_circle = 0
+counter_point_out_of_circle = 0
+task_3_circle_center_and_radius = enter_circle_center_points_and_radius()
+print(f'Center point O({task_3_circle_center_and_radius[0]}, {task_3_circle_center_and_radius[1]}).'
+      f' Radius: {task_3_circle_center_and_radius[2]}')
+for i in range(0, 3):
+    task_3_some_point = enter_some_point(i)
+    if check_if_point_is_in_circle(task_3_some_point, task_3_circle_center_and_radius):
+        counter_point_in_circle += 1
+    else:
+        counter_point_out_of_circle += 1
 
-
-# counter_point_in_circle = 0
-# counter_point_out_of_circle = 0
-# task_3_circle_center_and_radius = enter_circle_center_points_and_radius()
-# print(f'Center point O({task_3_circle_center_and_radius[0]}, {task_3_circle_center_and_radius[1]}).'
-#       f' Radius: {task_3_circle_center_and_radius[2]}')
-# for i in range(0, 3):
-#     task_3_some_point = enter_some_point(i)
-#     if check_if_point_is_in_circle(task_3_some_point, task_3_circle_center_and_radius):
-#         counter_point_in_circle += 1
-#     else:
-#         counter_point_out_of_circle += 1
-#
-# print(f'Count of points which are in circle: {counter_point_in_circle}')
-# print(f'Count of points which are out of circle: {counter_point_out_of_circle}')
+print(f'Count of points which are in circle: {counter_point_in_circle}')
+print(f'Count of points which are out of circle: {counter_point_out_of_circle}')
 
 
 # task 4
@@ -206,14 +199,12 @@ def get_second_square(d, z, t):
 
 
 print('\nTASK 4!!!')
-
-
-# task_4_quadrangle = enter_quadrangle_data()
-# task_4_square_of_quadrangle = round(
-#     get_first_square(task_4_quadrangle['x'], task_4_quadrangle['y']) +
-#     get_second_square(task_4_quadrangle['diagonal'], task_4_quadrangle['z'], task_4_quadrangle['t'])
-#     , 2)
-# print(f'Square of quadrangle: {task_4_square_of_quadrangle}')
+task_4_quadrangle = enter_quadrangle_data()
+task_4_square_of_quadrangle = round(
+    get_first_square(task_4_quadrangle['x'], task_4_quadrangle['y']) +
+    get_second_square(task_4_quadrangle['diagonal'], task_4_quadrangle['z'], task_4_quadrangle['t'])
+    , 2)
+print(f'Square of quadrangle: {task_4_square_of_quadrangle}')
 
 
 # task 5
@@ -259,14 +250,12 @@ def enter_count_checked_numbers():
 
 
 print('\nTASK 5!!!')
-
-
-# task_5_count_checked_numbers = enter_count_checked_numbers()
-# for i in range(0, task_5_count_checked_numbers):
-#     task_5_n = enter_n()
-#     print(f'{i + 1}) Entered N = {task_5_n}')
-#     task_5_natural_numbers = task_5_get_natural_numbers(task_5_n)
-#     print(f'List of natural numbers: {task_5_natural_numbers}')
+task_5_count_checked_numbers = enter_count_checked_numbers()
+for i in range(0, task_5_count_checked_numbers):
+    task_5_n = enter_n()
+    print(f'{i + 1}) Entered N = {task_5_n}')
+    task_5_natural_numbers = task_5_get_natural_numbers(task_5_n)
+    print(f'List of natural numbers: {task_5_natural_numbers}')
 
 
 # task 6
@@ -316,9 +305,7 @@ def enter_M_N_interval():
 
 
 print('\nTASK 6!!!')
-
-
-# task_6_numbers_with_large_number_of_divisors()
+task_6_numbers_with_large_number_of_divisors()
 
 
 # task 7
@@ -384,9 +371,7 @@ def is_prime(number):
 
 
 print('\nTASK 7!!!')
-
-
-# task_7_result_in_appropriate_format()
+task_7_result_in_appropriate_format()
 
 
 # task 8
@@ -403,9 +388,11 @@ def task_8_new_list_from_another():
 
 def get_new_list_from_another(some_list, min_number, max_number, bottom, upper):
     new_list = []
+    min_bottom = min_number + bottom
+    max_upper = max_number - upper
 
     for number in some_list:
-        if min_number + bottom <= number <= max_number - upper:
+        if min_bottom <= number <= max_upper:
             new_list.append(number)
 
     return new_list
@@ -447,18 +434,16 @@ def create_random_integers_list(count_integers):
 
 
 print('\nTASK 8!!!')
-# task_8_new_list_from_another()
+task_8_new_list_from_another()
 
 
 # task 9
-
-
 def task_9_task_6_decorator(n, task_6_func):
     print('\nLaunch time check decorator of task 6!')
     for i in range(1, 7, n):
         time_started = perf_counter()
         for repeat in range(1, 10 ** i):
-            task_6_func(get_random_int_number(0, 500), get_random_int_number(500, 1000))
+            task_6_func(randint(0, 500), randint(500, 1000))
         time_finished = perf_counter()
         time = time_finished - time_started
         print(f'Time of executing function {10 ** i} times: {round(time, 5)} sec.')
@@ -469,9 +454,9 @@ def task_9_task_7_decorator(n, task_7_func):
     for i in range(1, 7, n):
         time_started = perf_counter()
         for repeat in range(1, 10 ** i):
-            n = get_random_int_number(1, 100)
+            n = randint(1, 100)
             formats = ['list', 'count primes']
-            entered_format = formats[get_random_int_number(0, 1)]
+            entered_format = formats[randint(0, 1)]
             task_7_func(n, entered_format)
         time_finished = perf_counter()
         time = time_finished - time_started
@@ -483,11 +468,11 @@ def task_9_task_8_decorator(n, task_8_func):
     for i in range(1, 7, n):
         time_started = perf_counter()
         for repeat in range(1, 10 ** i):
-            created_random_int_list = create_random_integers_list(get_random_int_number(10, 25))
+            created_random_int_list = create_random_integers_list(randint(10, 25))
             min_number = min(created_random_int_list)
             max_number = max(created_random_int_list)
-            bottom = get_random_int_number(min_number, int(max_number / 2))
-            upper = get_random_int_number(min_number, int(max_number / 2))
+            bottom = randint(min_number, int(max_number / 2))
+            upper = randint(min_number, int(max_number / 2))
             task_8_func(created_random_int_list, min_number, max_number, bottom, upper)
         time_finished = perf_counter()
         time = time_finished - time_started
