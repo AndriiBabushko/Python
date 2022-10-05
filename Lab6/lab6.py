@@ -149,6 +149,58 @@ task_3()
 def task_4():
     print('\nTASK 4!')
 
+    if not os.path.isdir(r'./task4'):
+        os.mkdir(r'./task4')
+
+    with io.open(r'./task3/learning_python.txt', 'rt', encoding='utf-8') as learning_python_txt:
+        python_strings = []
+
+        for string in learning_python_txt:
+            python_strings.append(string.split(' '))
+
+        for i in range(0, len(python_strings)):
+            python_strings[i][0] = 'C'
+            python_strings[i] = " ".join(python_strings[i])
+
+    with io.open(r'./task4/learning_c.txt', 'wt', encoding='utf-8') as true_about_c_txt:
+        for c_string in python_strings:
+            true_about_c_txt.write(c_string)
+
+    with io.open(r'./task4/learning_c.txt', 'rt', encoding='utf-8') as learning_c_txt:
+        for c_string in learning_c_txt:
+            print(c_string, end='')
+            answer = enter_true_or_false()
+            if answer:
+                with io.open(r'./task4/true_about_c.txt', 'at', encoding='utf-8') as true_about_c_txt:
+                    true_about_c_txt.write(c_string)
+            else:
+                with io.open(r'./task4/false_about_c.txt', 'at', encoding='utf-8') as false_about_c_txt:
+                    false_about_c_txt.write(c_string)
+
+    with io.open(r'./task4/true_about_c.txt', 'rt', encoding='utf-8') as true_about_c_txt_read:
+        for c_string in true_about_c_txt_read:
+            print(c_string, end='')
+
+    with io.open(r'./task4/false_about_c.txt', 'rt', encoding='utf-8') as false_about_c_txt_read:
+        for c_string in false_about_c_txt_read:
+            print(c_string, end='')
+
+
+def enter_true_or_false():
+    while True:
+        try:
+            answer = input("Enter 'true' or 'false' about this statement: ")
+            if answer != 'true' and answer != 'false':
+                raise ValueError('Value was entered incorrectly!')
+            else:
+                pass
+                if answer == 'true':
+                    return True
+                elif answer == 'false':
+                    return False
+        except ValueError as value_err:
+            print(f'ERROR! {value_err}')
+
 
 task_4()
 
