@@ -47,7 +47,7 @@ def create_numbers_string():
     return new_string
 
 
-task_1()
+# task_1()
 
 # task 2
 """
@@ -91,7 +91,7 @@ def task_2_enter_some_numbers(count):
     return numbers_list
 
 
-task_2()
+# task_2()
 
 # task 3
 """
@@ -104,6 +104,34 @@ task_2()
 
 def task_3():
     print('\nTASK 3!')
+
+    if not os.path.isdir(r'./task3'):
+        os.mkdir('./task3')
+
+    with io.open(r'./task3/learning_python.txt', 'wt', encoding='utf-8') as learning_python_txt:
+        learning_python_txt.writelines(
+            ["Python можна використати для machine learning.\n",
+             "Python можна використати для написання простих скриптів.\n",
+             "Python можна використати для програмування веб додатків.\n",
+             "Python можна використати для написання особистого телеграм боту.\n"])
+
+    with io.open(r'./task3/learning_python.txt', 'rt', encoding='utf-8') as learning_python_txt:
+        python_string_list = []
+
+        for line in learning_python_txt:
+            python_string_list.append(line)
+
+        python_string_sorted_list = python_string_list[:]
+        python_string_sorted_list.sort(key=len)
+        print('\nSorted list:')
+        for string in python_string_sorted_list:
+            print(string, end="")
+
+        python_string_reversed_sorted_list = python_string_list[:]
+        python_string_reversed_sorted_list.sort(key=len, reverse=True)
+        print('\nReversed sorted list:')
+        for string in python_string_reversed_sorted_list:
+            print(string, end="")
 
 
 task_3()
