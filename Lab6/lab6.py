@@ -2,6 +2,8 @@
 import os
 import io
 import shutil
+from datetime import datetime
+from datetime import date
 
 # task 1
 """ 
@@ -202,7 +204,7 @@ def enter_true_or_false():
             print(f'ERROR! {value_err}')
 
 
-task_4()
+# task_4()
 
 # task 5
 """
@@ -216,6 +218,51 @@ task_4()
 
 def task_5():
     print('\nTASK 5!')
+
+    if not os.path.isdir(r'./task5'):
+        os.mkdir(r'./task5')
+
+    task_5_count = enter_count()
+    file_create_time = date.today().strftime('%B %d, %Y')
+
+    with io.open(r'./task5/guest_book.txt', 'wt', encoding='utf-8') as guest_book_txt:
+        guest_book_txt.write(f'File was created: {file_create_time}\n\n')
+        for counter in range(0, task_5_count):
+            name_greeting = f'{counter + 1}) Hello, ' + enter_name() + '! '
+            message_time = datetime.now().strftime('%H:%M:%S')
+            name_greeting += f'Name was entered in time: {message_time}.\n'
+            print(name_greeting, end="")
+            guest_book_txt.write(name_greeting)
+
+        last_changes_date = date.today().strftime('%B %d, %Y')
+        last_changes_time = datetime.now().strftime('%H:%M:%S')
+        guest_book_txt.write(f'\nLast changes time: {last_changes_date} {last_changes_time}.\n')
+
+
+def enter_name():
+    while True:
+        try:
+            name = input('Enter name: ')
+            if len(name) < 2:
+                raise ValueError('Name\'s length is less than 2!')
+            else:
+                pass
+                return name
+        except ValueError as value_err:
+            print(f'ERROR! {value_err}')
+
+
+def enter_count():
+    while True:
+        try:
+            count = int(input('Enter count of names: '))
+            if count <= 0:
+                raise ValueError('Count names was entered incorrectly!')
+            else:
+                pass
+                return count
+        except ValueError as value_err:
+            print(f'ERROR! {value_err}')
 
 
 task_5()
