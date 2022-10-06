@@ -4,6 +4,7 @@ import io
 import shutil
 from datetime import datetime
 from datetime import date
+from time import perf_counter
 
 # task 1
 """ 
@@ -227,6 +228,7 @@ def task_5():
 
     with io.open(r'./task5/guest_book.txt', 'wt', encoding='utf-8') as guest_book_txt:
         guest_book_txt.write(f'File was created: {file_create_time}\n\n')
+
         for counter in range(0, task_5_count):
             name_greeting = f'{counter + 1}) Hello, ' + enter_name() + '! '
             message_time = datetime.now().strftime('%H:%M:%S')
@@ -265,19 +267,51 @@ def enter_count():
             print(f'ERROR! {value_err}')
 
 
-task_5()
+# task_5()
 
 # task 6
 """
-    Завдання 6. Збережіть в тектовому файлі публікацію про Python на 3000 слів англійською мовою. Напишіть програму, 
-    що аналізуватиме частоту з якою в тексті зустрічастимуться окремі літери чи слова незалежно від їх регістру. 
-    Результат робот програми має виводитись в консоль і зберігатись в окремому файлі з зазначенням часу його стоврення, 
-    часу виконнання окремих змін, результатів пошкуку і часу, що знадовся на виконнання цього пошуку.
+    Завдання 6. Збережіть в текстовому файлі публікацію про Python на 3000 слів англійською мовою. Напишіть програму, 
+    що аналізуватиме частоту з якою в тексті зустрічатимуться окремі літери чи слова незалежно від їх регістру. 
+    Результат робот програми має виводитись в консоль і зберігатись в окремому файлі з зазначенням часу його створення, 
+    часу виконання окремих змін, результатів пошуку і часу, що знадобився на виконання цього пошуку.
 """
 
 
 def task_6():
+    import re
     print('\nTASK 6!')
+
+    with io.open(r'./task6/post_about_python.txt', 'rt', encoding='utf-8') as post_about_python_txt:
+        words = re.split(r' |\n|\? |\.|\, |\: |\;', post_about_python_txt.read().lower())
+
+    file_create_date = date.today().strftime('%B %d, %Y')
+    file_create_time = datetime.now().strftime('%H:%M:%S')
+    with io.open(r'./task6/word_frequency.txt', 'wt', encoding='utf-8') as word_frequency_txt:
+        word_frequency_txt.write(f'File was created: {file_create_date} {file_create_time}\n\n')
+        print(f'File was created: {file_create_time}\n')
+
+        words_without_duplicates = []
+        for string in words:
+            if string not in words_without_duplicates:
+                words_without_duplicates.append(string)
+
+        print(words_without_duplicates)
+        for i in range(0, len(words_without_duplicates)):
+            time_started = perf_counter()
+            counter = 0
+            for j in range(0, len(words)):
+                if words_without_duplicates[i] == words[j]:
+                    counter += 1
+            time_finished = perf_counter()
+            write_time = round(time_finished - time_started, 8)
+            word_frequency_txt.write(f'"{words[i]}" repeats "{counter}" times. Write time: {write_time}.\n')
+            print(f'"{words[i]}" repeats "{counter}" times. Write time: {write_time}.')
+
+        last_changes_date = date.today().strftime('%B %d, %Y')
+        last_changes_time = datetime.now().strftime('%H:%M:%S')
+        word_frequency_txt.write(f'\nLast changes time: {last_changes_date} {last_changes_time}.\n')
+        print(f'\nLast changes time: {last_changes_date} {last_changes_time}.')
 
 
 task_6()
