@@ -1,4 +1,5 @@
 """ Lab 6. Python. Andrii Babushko. Repository: https://github.com/AndriiBabushko/Python """
+import csv
 import os
 import io
 import shutil
@@ -314,7 +315,7 @@ def task_6():
         print(f'\nLast changes time: {last_changes_date} {last_changes_time}.')
 
 
-task_6()
+# task_6()
 
 # task 7
 """
@@ -329,6 +330,94 @@ task_6()
 
 def task_7():
     print('\nTASK 7!')
+
+    if not os.path.isdir(r'./task7'):
+        os.mkdir(r'./task7')
+
+    with io.open(r'./task7/marks.lab6.csv', 'rt', encoding='utf-8') as marks_lab6_csv:
+        marks_csv = csv.reader(marks_lab6_csv)
+        marks = [line for line in marks_csv]
+
+    students_count = len(marks)
+    print(f'Total students count who wrote a test: {students_count}')
+
+    students_marks = []
+    for i in range(students_count):
+        mark_string = marks[i][4].split(',')
+        mark_number = float(mark_string[0]) + float(int(mark_string[1]) / 100)
+        students_marks.append(mark_number)
+
+    print()
+    iterator = 1
+    for mark in students_marks:
+        print(f'{iterator} student received {mark} mark.')
+        iterator += 1
+
+    students_time = []
+    for i in range(students_count):
+        time = marks[i][3].split(' ')
+        if len(time) > 2:
+            minutes = int(time[0])
+            seconds = int(time[2]) + minutes * 60
+        else:
+            minutes = int(time[0])
+            seconds = minutes * 60
+        students_time.append(seconds)
+
+    students_mark_per_min = []
+    for i in range(students_count):
+        students_mark_per_min.append(round((students_marks[i] / students_time[i]) * 60, 2))
+
+    print()
+    iterator = 1
+    for average_mark in students_mark_per_min:
+        print(f'{iterator} student received {average_mark}/min.')
+        iterator += 1
+
+    file_create_date = date.today().strftime('%B %d, %Y')
+    file_create_time = datetime.now().strftime('%H:%M:%S')
+    with io.open(r'./task7/statistics.txt', 'wt', encoding='utf-8') as statistics_txt:
+        statistics_txt.write(f'File was created: {file_create_date} {file_create_time}\n\n')
+
+        student_answers = []
+        for answers in marks:
+            student_answers.append(answers[5:])
+
+        print()
+        iterator = 1
+        for answer in student_answers:
+            correct_answers = 0
+            incorrect_answers = 0
+
+            for i in range(0, len(answer)):
+                if answer[i] == '0,50':
+                    correct_answers += 1
+                else:
+                    incorrect_answers += 1
+
+            correct_answers_percentage = round((correct_answers / len(answer)) * 100)
+            incorrect_answers_percentage = round((incorrect_answers / len(answer)) * 100)
+            statistics_txt.write(f'{iterator} student has {correct_answers_percentage}% of correct answers '
+                                 f'and {incorrect_answers_percentage}% of incorrect answers.\n')
+            print(f'{iterator} student has {correct_answers_percentage}% of correct answers '
+                  f'and {incorrect_answers_percentage}% of incorrect answers.')
+            iterator += 1
+
+        print()
+        statistics_txt.write('\n')
+        top_5_results = []
+        students_mark_per_min_copy = students_mark_per_min[:]
+        for i in range(0, 5):
+            max_average_mark = max(students_mark_per_min_copy)
+            top_5_results.append(max_average_mark)
+            students_mark_per_min_copy.pop(students_mark_per_min_copy.index(max_average_mark))
+            index_of_student = students_mark_per_min.index(top_5_results[i])
+            statistics_txt.write(f'Top {i + 1}! {index_of_student} student has {top_5_results[i]}/min mark.\n')
+            print(f'Top {i + 1}! {index_of_student} student has {top_5_results[i]}/min mark.')
+
+        last_changes_date = date.today().strftime('%B %d, %Y')
+        last_changes_time = datetime.now().strftime('%H:%M:%S')
+        statistics_txt.write(f'\nLast changes time: {last_changes_date} {last_changes_time}.\n')
 
 
 task_7()
