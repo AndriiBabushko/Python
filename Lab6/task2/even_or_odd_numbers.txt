@@ -1,3 +1,2 @@
 1 is odd number!
-6 is even number!
-3 is odd number!
+4 is even number!

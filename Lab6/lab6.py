@@ -2,7 +2,6 @@
 import csv
 import os
 import io
-import shutil
 from datetime import datetime
 from datetime import date
 from time import perf_counter
@@ -51,10 +50,10 @@ def create_numbers_string():
     return new_string
 
 
-# task_1()
+task_1()
 
 # task 2
-"""
+""" 
     Завдання 2. Реалізуйте програму, яка зчитує довільну кількість цілих чисел, що вводяться з командного рядка, і 
     записує у текстовий файл інформацію, щодо парності або непарності чисел.
 """
@@ -95,7 +94,7 @@ def task_2_enter_some_numbers(count):
     return numbers_list
 
 
-# task_2()
+task_2()
 
 # task 3
 """
@@ -170,6 +169,11 @@ def task_4():
         for c_string in python_strings:
             true_about_c_txt.write(c_string)
 
+    if os.path.exists(r'./task4/true_about_c.txt'):
+        os.remove(r'./task4/true_about_c.txt')
+    if os.path.exists(r'./task4/false_about_c.txt'):
+        os.remove(r'./task4/false_about_c.txt')
+
     with io.open(r'./task4/learning_c.txt', 'rt', encoding='utf-8') as learning_c_txt:
         for c_string in learning_c_txt:
             print(c_string, end='')
@@ -181,10 +185,12 @@ def task_4():
                 with io.open(r'./task4/false_about_c.txt', 'at', encoding='utf-8') as false_about_c_txt:
                     false_about_c_txt.write(c_string)
 
+    print(f'True statements about C:')
     with io.open(r'./task4/true_about_c.txt', 'rt', encoding='utf-8') as true_about_c_txt_read:
         for c_string in true_about_c_txt_read:
             print(c_string, end='')
 
+    print(f'False statements about C:')
     with io.open(r'./task4/false_about_c.txt', 'rt', encoding='utf-8') as false_about_c_txt_read:
         for c_string in false_about_c_txt_read:
             print(c_string, end='')
@@ -206,7 +212,7 @@ def enter_true_or_false():
             print(f'ERROR! {value_err}')
 
 
-# task_4()
+task_4()
 
 # task 5
 """
@@ -268,7 +274,7 @@ def enter_count():
             print(f'ERROR! {value_err}')
 
 
-# task_5()
+task_5()
 
 # task 6
 """
@@ -297,7 +303,6 @@ def task_6():
             if string not in words_without_duplicates:
                 words_without_duplicates.append(string)
 
-        print(words_without_duplicates)
         for i in range(0, len(words_without_duplicates)):
             time_started = perf_counter()
             counter = 0
@@ -315,7 +320,7 @@ def task_6():
         print(f'\nLast changes time: {last_changes_date} {last_changes_time}.')
 
 
-# task_6()
+task_6()
 
 # task 7
 """
@@ -412,8 +417,8 @@ def task_7():
             top_5_results.append(max_average_mark)
             students_mark_per_min_copy.pop(students_mark_per_min_copy.index(max_average_mark))
             index_of_student = students_mark_per_min.index(top_5_results[i])
-            statistics_txt.write(f'Top {i + 1}! {index_of_student} student has {top_5_results[i]}/min mark.\n')
-            print(f'Top {i + 1}! {index_of_student} student has {top_5_results[i]}/min mark.')
+            statistics_txt.write(f'Top {i + 1}! {index_of_student + 1} student has {top_5_results[i]}/min mark.\n')
+            print(f'Top {i + 1}! {index_of_student + 1} student has {top_5_results[i]}/min mark.')
 
         last_changes_date = date.today().strftime('%B %d, %Y')
         last_changes_time = datetime.now().strftime('%H:%M:%S')

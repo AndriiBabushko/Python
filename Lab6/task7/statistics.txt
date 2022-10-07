@@ -1,4 +1,4 @@
-File was created: October 06, 2022 21:56:11
+File was created: October 07, 2022 07:24:41
 
 1 student has 80% of correct answers and 20% of incorrect answers.
 2 student has 80% of correct answers and 20% of incorrect answers.
@@ -171,10 +171,10 @@ File was created: October 06, 2022 21:56:11
 169 student has 90% of correct answers and 10% of incorrect answers.
 170 student has 80% of correct answers and 20% of incorrect answers.
 
-Top 1! 146 student has 1.99/min mark.
-Top 2! 94 student has 1.68/min mark.
-Top 3! 88 student has 1.54/min mark.
-Top 4! 162 student has 1.51/min mark.
-Top 5! 105 student has 1.42/min mark.
+Top 1! 147 student has 1.99/min mark.
+Top 2! 95 student has 1.68/min mark.
+Top 3! 89 student has 1.54/min mark.
+Top 4! 163 student has 1.51/min mark.
+Top 5! 106 student has 1.42/min mark.
 
-Last changes time: October 06, 2022 21:56:11.
+Last changes time: October 07, 2022 07:24:41.
