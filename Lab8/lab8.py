@@ -114,7 +114,82 @@ for brake in range(0, 5):
     описують конкретні породи собак. Визначте для цих класів атрибути nature і breed відповідно, включіть у класи по одному методу, що визначає поведінку конкретної породи собаки. 
     Створіть батьківський клас Pets, що створює список ваших домашніх улюбленців. У підсумку, надрукуйте інформацію про ваших домашніх тварин, на зразок, як у вихідних даних.
 """
+
+
+class Dog:
+    __mammal: bool
+    __nature: str
+    __breed: str
+
+    def __init__(self, name: str, age: int):
+        self.__name: str = name
+        self.__age: int = age
+
+    def __str__(self):
+        return f'Dog name: {self.__name}. Dog age: {self.__age}.'
+
+    def voice(self):
+        if self.__age < 2:
+            return 'Tyaf!'
+        elif 2 <= self.__age < 5:
+            return 'Wafh!'
+        else:
+            return 'GAF!'
+
+
+class Akita(Dog):
+    __mammal = True
+    __nature = 'The Akita is generally seen as territorial about its property, and can be reserved with strangers.'
+    __breed = 'Akita'
+
+    def __str__(self):
+        return f'Mammal: {self.__mammal}.\nNature: {self.__nature}.\nBreed: {self.__breed}.'
+
+    @staticmethod
+    def temperament():
+        return 'Akita is here! It\'s my territory. GAF! I\'m cleaning my face after eating!'
+
+
+class Doberman(Dog):
+    __mammal = True
+    __nature = 'Doberman are considered to be working dogs and often stereotyped as being ferocious and aggressive.'
+    __breed = 'Doberman'
+
+    def __str__(self):
+        return f'Mammal: {self.__mammal}.\nNature: {self.__nature}.\nBreed: {self.__breed}.'
+
+    @staticmethod
+    def temperament():
+        return 'GAFFFF!!!!! GAF! GAF! GAF!I\'m Doberman and it\'s my owner, bi*ches!'
+
+
+class Pets:
+    def __init__(self):
+        self._pets_list: list = []
+
+    def add_pet(self, pet):
+        self._pets_list.append(pet)
+
+    def remove_pet(self, pet):
+        self._pets_list.remove(pet)
+
+    @property
+    def pets_list(self):
+        return self._pets_list
+
+
 print('\nTASK 4!!!')
+task_4_first_dog: Akita = Akita('Aki', 4)
+task_4_second_dog: Doberman = Doberman('Loli', 2)
+task_4_third_dog: Dog = Dog('Poppy', 7)
+task_4_pets: Pets = Pets()
+task_4_pets.add_pet(task_4_first_dog)
+task_4_pets.add_pet(task_4_second_dog)
+task_4_pets.add_pet(task_4_third_dog)
+counter: int = 1
+for pet in task_4_pets.pets_list:
+    print(f'{counter} dog:\n{pet}')
+    counter += 1
 
 # task 5
 """
