@@ -75,11 +75,44 @@ for tossed in range(0, 5):
     Створіть екземпляр класу Car і викличте метод accelerate п’ять разів. Після кожного виклику методу accelerate отримайте поточну швидкість автомобіля і надрукуйте її значення.
     Потім викличте метод brake п’ять разів. Після кожного виклику методу brake отримайте поточну швидкість автомобіля та надрукуйте її значення.
 """
+
+
+class Car:
+    def __init__(self, mark: str, model: str, year: str, speed: int = 0):
+        self.__car_mark: str = mark
+        self.__car_model: str = model
+        self.__car_year: str = year
+        self.__car_speed: int = speed
+
+    def accelerate(self):
+        self.__car_speed += 5
+
+    def brake(self):
+        if self.__car_speed > 0:
+            self.__car_speed -= 5
+
+    def get_speed(self):
+        return self.__car_speed
+
+
 print('\nTASK 3!!!')
+task_3_car: Car = Car('Chevrolet', 'Corvette 2020(C8)', '2020')
+print('Accelerating car...')
+for accelerate in range(0, 5):
+    task_3_car.accelerate()
+    print(f'Current car speed: {task_3_car.get_speed()}')
+print('Braking car...')
+for brake in range(0, 5):
+    task_3_car.brake()
+    print(f'Current car speed: {task_3_car.get_speed()}')
 
 # task 4
 """
-
+4.	Напишіть клас Dog, який має три атрибути класу: mammal (ссавець), nature (характер) і breed (порода), та два атрибути ексземпляра: name (кличка) і age (вік).
+    Створіть екземпляри трьох нових собак, кожна з яких різного віку. Визначте у класі Dog метод для виведення значень атрибутів екземпляру - імені та віку конкретної собаки.
+    За потреби, додайте кілька інших методів, які визначають поведінку собаки (подавання голосу тощо). Напишіть кілька класів, які унаслідуються від батьківського класу Dog, що 
+    описують конкретні породи собак. Визначте для цих класів атрибути nature і breed відповідно, включіть у класи по одному методу, що визначає поведінку конкретної породи собаки. 
+    Створіть батьківський клас Pets, що створює список ваших домашніх улюбленців. У підсумку, надрукуйте інформацію про ваших домашніх тварин, на зразок, як у вихідних даних.
 """
 print('\nTASK 4!!!')
 
