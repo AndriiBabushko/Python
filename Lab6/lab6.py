@@ -31,7 +31,7 @@ def task_1():
                 task_1_sum += int(number)
                 task_1_number_list.append(int(number))
             except ValueError as err:
-                print(f'ERROR! {ValueError}')
+                print(f'ERROR! {err}')
 
         with io.open(r'./task1/sum_numbers.txt', 'wt', encoding='utf-8') as sum_numbers_txt:
             sum_numbers_txt.write(str(task_1_sum))
