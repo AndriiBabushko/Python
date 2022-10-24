@@ -193,9 +193,52 @@ for pet in task_4_pets.pets_list:
 
 # task 5
 """
-
+5.	Дано послідовність цілих чисел. Необхідно її обробити і вивести на екран суму першої п’ятірки чисел із цієї послідовності, потім суму другої п’ятірки, і т. д. Але послідовність
+    не дається відразу загалом. З плином часу до вас надходять її послідовні частини. Наприклад, спочатку перші три елементи, потім наступні шість, потім наступні два і т. д.
+    Реалізуйте клас Buffer, який буде накопичувати в собі елементи послідовності і виводити суму п’ятірок послідовних елементів у міру їх накопичення. Однією з вимог до класу є те,
+    що він не повинен зберігати в собі більше елементів, ніж йому дійсно необхідно, тобто, він не повинен зберігати елементи, які вже увійшли в п’ятірку, для якої була виведена
+    сума. Зверніть увагу, що під час виконання методу add виводити суму п’ятірок може знадобитися кілька разів до тих пір, поки в буфері не залишиться менше п’яти елементів.
 """
+
+
+class Buffer:
+    def __init__(self, *data: float):
+        self.__sequence: list = [*data]
+
+    def __str__(self):
+        return f'Sequence: {self.__sequence}'
+
+    def add_elems_to_sequence(self, *data: float):
+        for arg in data:
+            self.__sequence.append(arg)
+
+    def get_sum_list_5_elems(self):
+        sum_list = []
+
+        last_counter = 0
+        for counter in range(5, len(self.__sequence), 5):
+            float_sum = 0
+            for index in range(last_counter, counter):
+                float_sum += self.__sequence[index]
+            last_counter = counter
+            sum_list.append(float_sum)
+
+        return sum_list
+
+    def get_sequence(self):
+        return self.__sequence
+
+    def get_sequence_length(self):
+        return len(self.__sequence)
+
+
 print('\nTASK 5!!!')
+task_5_sequence: Buffer = Buffer(1, 2, 3, 4, 5, 1, 1, 2)
+print(f'Current Buffer sequence: {task_5_sequence.get_sequence()}')
+print(f'Sum list of every 5 elems of sequence: {task_5_sequence.get_sum_list_5_elems()}')
+task_5_sequence.add_elems_to_sequence(1, 1, 3, 10, -10, -20)
+print(f'Current Buffer sequence: {task_5_sequence.get_sequence()}')
+print(f'Sum list of every 5 elems of sequence: {task_5_sequence.get_sum_list_5_elems()}')
 
 # task 6
 """
