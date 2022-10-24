@@ -242,18 +242,79 @@ print(f'Sum list of every 5 elems of sequence: {task_5_sequence.get_sum_list_5_e
 
 # task 6
 """
-
+    6.	Напишіть клас-виняток, на основі вбудованого в Python класу ValueError(). Клас буде представляти перевірку певного імені на основі його довжини. Якщо довжина введеного 
+    імені є меншою 10, то має генеруватися виняток як у вихідних даних. У інших випадках нічого не виводиться.
 """
+
+
+class FullNameError(Exception):
+    def __init__(self, value: str):
+        self.value: str = value
+
+
+class Name:
+    def __init__(self, first_name: str, last_name: str, middle_name: str):
+        self.__first_name: str = first_name
+        self.__last_name: str = last_name
+        self.__middle_name: str = middle_name
+        self.__full_name = last_name + ' ' + first_name + ' ' + middle_name
+
+    def __str__(self):
+        return f'First name -> {self.__first_name} Last name -> {self.__last_name} Middle name -> {self.__middle_name}'
+
+    def check_entered_name(self):
+        try:
+            if len(self.__full_name) < 10:
+                raise FullNameError('Name length is less than 10!')
+            else:
+                pass
+                print('Name was entered correctly!')
+        except FullNameError as name_error:
+            self.__first_name: str = ''
+            self.__last_name: str = ''
+            self.__middle_name: str = ''
+            print(name_error)
+
+
 print('\nTASK 6!!!')
+task_5_name_1: Name = Name('Andrii', 'Babushko', 'Sergiyovich')
+print(f'Data of task_5_name_1 instance of a Name class:\n{task_5_name_1}')
+task_5_name_1.check_entered_name()
+task_5_name_2: Name = Name('A', 'B', 'S')
+print(f'\nData of task_5_name_2 instance of a Name class:\n{task_5_name_2}')
+task_5_name_2.check_entered_name()
 
 # task 7
 """
-
+    7.	Напишіть один клас для перетворення десяткового числа на число в римській системі числення. І ще один клас для перетворення числа з римської системи числення у десяткове 
+    число.
 """
 print('\nTASK 7!!!')
 
 # task 8
 """
+    8.	Онлайн-магазин
+a.	Створіть клас з ім’ям Shop(). Клас Shop() повинен містити два атрибути: shop_name і store_type. Створіть метод describe_shop(), який виводить два атрибути, і метод open_shop(),
+який виводить повідомлення про те, що онлайн-магазин відкритий. Створіть на основі класу екземпляр з ім’ям store. Виведіть два атрибути окремо, потім викличте обидва методи.
+b.	Створіть три різних екземпляри класу, викличте для кожного екземпляру метод describe_shop().
+c.	Додайте атрибут number_of_units зі значенням за замовчуванням 0; він представляє кількість видів товару у магазині. Створіть екземпляр з ім’ям store. Виведіть значення
+number_of_units, а потім змініть number_of_units і виведіть знову.
+d.	Додайте метод з ім’ям set_number_of_units(), що дозволяє задати кількість видів товару. Викличте метод з новим числом, знову виведіть значення. Додайте метод з ім’ям 
+increment_number_of_units(), який збільшує кількість видів товару на задану величину. Викличте цей метод.
+e.	Напишіть клас Discount(), що успадковує від класу Shop(). Додайте атрибут з ім’ям discount_products для зберігання списку товарів, на які встановлена знижка. Напишіть метод 
+get_discounts_ptoducts, який виводить цей список. Створіть екземпляр store_discount і викличте цей метод.
+f.	Збережіть код класу Shop() у модулі. Створіть окремий файл, що імпортує клас Shop(). Створіть екземпляр all_store і викличте один з методів Shop(), щоб перевірити, що команда 
+import працює правильно.
+"""
+print('\nTASK 8!!!')
 
+# task 9
+"""
+    9.	Облік користувачів на сайті
+a.	Створіть клас з ім’ям User. Створіть два атрибути first_name і last_name, а потім ще кілька атрибутів, які зазвичай зберігаються у профілі користувача (поштова адреса, нікнейм, що відображається на сайті, згода на розсилку новин з форуму). Напишіть метод describe_user який виводить повне ім’я користувача. Створіть ще один метод greeting_user() для виведення персонального вітання для користувача. Створіть кілька примірників, які представляють різних користувачів. Викличте обидва методи для кожного користувача.
+b.	Додайте атрибут login_attempts у клас User. Напишіть метод increment_login_attempts(), що збільшує значення login_attempts на 1. Напишіть інший метод з ім’ям reset_login_attempts(), обнуляє значення login_attempts. Створіть екземпляр класу User і викличте increment_login_attempts() кілька разів. Виведіть значення login_attempts, щоб переконатися у тому, що значення було змінено правильно, а потім викличте reset_login_attempts(). Знову виведіть login_attempts і переконайтеся у тому, що значення обнулилося
+c.	Адміністратор - користувач з повними адміністративними привілеями. Напишіть клас з ім’ям Admin, що успадковує від класу User. Додайте атрибут privileges для зберігання списку рядків виду «Allowed to add message», «Allowed to delete users», «Allowed to ban users» і т. д. Напишіть метод show_privileges() для виведення набору привілеїв адміністратора. Створіть екземпляр Admin і викличте метод.
+d.	Напишіть клас Privileges. Клас повинен містити всього один атрибут privileges зі списком, який треба забрати із класу Admin. Водночас, необхідно перемістити метод show_privileges() у клас Privileges із класу Admin. Створіть екземпляр priv як атрибут класу Admin. Створіть новий екземпляр admin і використайте метод для виведення списку привілеїв.
+e.	Збережіть клас User в одному модулі, а класи Privileges і Admin у іншому модулі. В окремому файлі створіть екземпляр admin і викличте метод show_privileges(), щоб перевірити, що все працює правильно.
 """
 print('\nTASK 8!!!')
