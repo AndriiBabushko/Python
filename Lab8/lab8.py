@@ -277,12 +277,12 @@ class Name:
 
 
 print('\nTASK 6!!!')
-task_5_name_1: Name = Name('Andrii', 'Babushko', 'Sergiyovich')
-print(f'Data of task_5_name_1 instance of a Name class:\n{task_5_name_1}')
-task_5_name_1.check_entered_name()
-task_5_name_2: Name = Name('A', 'B', 'S')
-print(f'\nData of task_5_name_2 instance of a Name class:\n{task_5_name_2}')
-task_5_name_2.check_entered_name()
+task_6_name_1: Name = Name('Andrii', 'Babushko', 'Sergiyovich')
+print(f'Data of task_6_name_1 instance of a Name class:\n{task_6_name_1}')
+task_6_name_1.check_entered_name()
+task_6_name_2: Name = Name('A', 'B', 'S')
+print(f'\nData of task_6_name_2 instance of a Name class:\n{task_6_name_2}')
+task_6_name_2.check_entered_name()
 
 # task 7
 """
