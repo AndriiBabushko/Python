@@ -289,7 +289,80 @@ task_6_name_2.check_entered_name()
     7.	Напишіть один клас для перетворення десяткового числа на число в римській системі числення. І ще один клас для перетворення числа з римської системи числення у десяткове 
     число.
 """
+
+
+class DecimalToRoman:
+    __roman_number: str
+
+    def __init__(self, decimal: int):
+        self.__decimal_number: int = decimal
+
+    def __str__(self):
+        return f'Decimal number: {self.__decimal_number}; Roman: {self.__roman_number};'
+
+    def move_decimal_to_roman(self):
+        values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        symbols = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+
+        i = 0
+        number = self.__decimal_number
+        roman_number: str = ''
+
+        while number > 0:
+            for interator in range(number // values[i]):
+                roman_number += symbols[i]
+                number -= values[i]
+            i += 1
+
+        self.__roman_number = roman_number
+        return roman_number
+
+    def set_decimal(self, decimal: int):
+        self.__decimal_number: int = decimal
+
+    def get_roman_number(self):
+        return self.__roman_number
+
+    def get_decimal_number(self):
+        return self.__decimal_number
+
+
+class RomanToDecimal:
+    __decimal_number: int
+
+    def __init__(self, roman: str):
+        self.__roman_number: str = roman
+
+    def __str__(self):
+        return f'Roman: {self.__roman_number}; Decimal number: {self.__decimal_number};'
+
+    def move_roman_to_decimal(self):
+        roman_values = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        decimal_value = 0
+
+        for i in range(len(self.__roman_number)):
+            if i > 0 and roman_values[self.__roman_number[i]] > roman_values[self.__roman_number[i - 1]]:
+                decimal_value += roman_values[self.__roman_number[i]] - 2 * roman_values[self.__roman_number[i - 1]]
+            else:
+                decimal_value += roman_values[self.__roman_number[i]]
+
+        return decimal_value
+
+    def set_roman(self, roman: str):
+        self.__roman_number: str = roman
+
+    def get_roman_number(self):
+        return self.__roman_number
+
+    def get_decimal_number(self):
+        return self.__decimal_number
+
+
 print('\nTASK 7!!!')
+task_7_decimal_to_roman: DecimalToRoman = DecimalToRoman(15)
+print(f'Move {task_7_decimal_to_roman.get_decimal_number()} decimal number to roman number: {task_7_decimal_to_roman.move_decimal_to_roman()}')
+task_7_roman_to_decimal: RomanToDecimal = RomanToDecimal(task_7_decimal_to_roman.get_roman_number())
+print(f'Move {task_7_roman_to_decimal.get_roman_number()} roman number to decimal number: {task_7_roman_to_decimal.move_roman_to_decimal()}')
 
 # task 8
 """
