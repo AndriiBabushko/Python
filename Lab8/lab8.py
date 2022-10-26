@@ -1,4 +1,7 @@
 """ Lab 8. Python. Andrii Babushko. Repository: https://github.com/AndriiBabushko/Python """
+import sys
+
+sys.path.insert(0, r'modules')
 
 # task 1
 """
@@ -379,15 +382,124 @@ get_discounts_ptoducts, який виводить цей список. Ство�
 f.	Збережіть код класу Shop() у модулі. Створіть окремий файл, що імпортує клас Shop(). Створіть екземпляр all_store і викличте один з методів Shop(), щоб перевірити, що команда 
 import працює правильно.
 """
+
+from modules import shop
+
 print('\nTASK 8!!!')
+print('a)')
+task_8_store: shop.Shop = shop.Shop('Store', 'stuff store')
+print(f'Print separately shop name: {task_8_store.name}')
+print(f'Print separately shop type: {task_8_store.type}')
+print('Shop status:')
+task_8_store.open_shop()
+print('Describe shop:')
+task_8_store.describe_shop()
+
+print('\nb)')
+task_8_raccoons_tech_shop: shop.Shop = shop.Shop('Tech Raccoons', 'tech shop')
+print('Describe shop:')
+task_8_raccoons_tech_shop.describe_shop()
+task_8_raccoons_sex_shop: shop.Shop = shop.Shop('Sexy Raccoons', 'sex shop')
+print('Describe shop:')
+task_8_raccoons_sex_shop.describe_shop()
+task_8_raccoons_food_shop: shop.Shop = shop.Shop('Raccoon\'s Food Market', 'food market')
+print('Describe shop:')
+task_8_raccoons_food_shop.describe_shop()
+
+print('\nc)')
+print(f'Current store\'s number of units: {task_8_store.number_of_units}')
+task_8_store.number_of_units = 12
+print(f'Changed store\'s number of units: {task_8_store.number_of_units}')
+
+print('\nd)')
+task_8_store.set_number_of_units(10)
+print(f'Set store\'s number of units by 10: {task_8_store.number_of_units}')
+task_8_store.increment_number_of_units(10)
+print(f'Incremented store\'s number of units by 10: {task_8_store.number_of_units}')
+
+
+class Discount(shop.Shop):
+    def __init__(self, shop_name: str, shop_type: str, **kwargs):
+        super().__init__(shop_name, shop_type)
+        self.discount_products: dict = kwargs
+
+    def get_discounts_products(self):
+        discount_keys: list = list(self.discount_products.keys())
+        discount_values: list = list(self.discount_products.values())
+
+        print(f'Current discounts:')
+        for iterator in range(0, len(self.discount_products)):
+            print(f'{discount_keys[iterator]}: {discount_values[iterator]}')
+
+
+print('\ne)')
+discounts: dict = {'Car Toy': '10%', 'Doll toy': '20%', 'Mobile phone': '15%'}
+task_8_discount_store: Discount = Discount('Store', 'stuff store', Car_Toy='10%', Doll_toy='20%', Mobile_phone='15%')
+task_8_discount_store.get_discounts_products()
+
+print('\nf)')
+task_8_all_store: shop.Shop = shop.Shop('All  store', 'store')
+print(f'Describe all store:')
+task_8_all_store.describe_shop()
+task_8_all_store.set_number_of_units(20)
+print(f'Set all store\'s number of units by 20: {task_8_all_store.number_of_units}')
+task_8_all_store.increment_number_of_units(30)
+print(f'Incremented store\'s number of units by 30: {task_8_all_store.number_of_units}')
 
 # task 9
 """
     9.	Облік користувачів на сайті
-a.	Створіть клас з ім’ям User. Створіть два атрибути first_name і last_name, а потім ще кілька атрибутів, які зазвичай зберігаються у профілі користувача (поштова адреса, нікнейм, що відображається на сайті, згода на розсилку новин з форуму). Напишіть метод describe_user який виводить повне ім’я користувача. Створіть ще один метод greeting_user() для виведення персонального вітання для користувача. Створіть кілька примірників, які представляють різних користувачів. Викличте обидва методи для кожного користувача.
-b.	Додайте атрибут login_attempts у клас User. Напишіть метод increment_login_attempts(), що збільшує значення login_attempts на 1. Напишіть інший метод з ім’ям reset_login_attempts(), обнуляє значення login_attempts. Створіть екземпляр класу User і викличте increment_login_attempts() кілька разів. Виведіть значення login_attempts, щоб переконатися у тому, що значення було змінено правильно, а потім викличте reset_login_attempts(). Знову виведіть login_attempts і переконайтеся у тому, що значення обнулилося
-c.	Адміністратор - користувач з повними адміністративними привілеями. Напишіть клас з ім’ям Admin, що успадковує від класу User. Додайте атрибут privileges для зберігання списку рядків виду «Allowed to add message», «Allowed to delete users», «Allowed to ban users» і т. д. Напишіть метод show_privileges() для виведення набору привілеїв адміністратора. Створіть екземпляр Admin і викличте метод.
-d.	Напишіть клас Privileges. Клас повинен містити всього один атрибут privileges зі списком, який треба забрати із класу Admin. Водночас, необхідно перемістити метод show_privileges() у клас Privileges із класу Admin. Створіть екземпляр priv як атрибут класу Admin. Створіть новий екземпляр admin і використайте метод для виведення списку привілеїв.
-e.	Збережіть клас User в одному модулі, а класи Privileges і Admin у іншому модулі. В окремому файлі створіть екземпляр admin і викличте метод show_privileges(), щоб перевірити, що все працює правильно.
+a.	Створіть клас з ім’ям User. Створіть два атрибути first_name і last_name, а потім ще кілька атрибутів, які зазвичай зберігаються у профілі користувача (поштова адреса, нікнейм, 
+що відображається на сайті, згода на розсилку новин з форуму). Напишіть метод describe_user який виводить повне ім’я користувача. Створіть ще один метод greeting_user() для 
+виведення персонального вітання для користувача. Створіть кілька примірників, які представляють різних користувачів. Викличте обидва методи для кожного користувача.
+b.	Додайте атрибут login_attempts у клас User. Напишіть метод increment_login_attempts(), що збільшує значення login_attempts на 1. Напишіть інший метод з ім’ям 
+reset_login_attempts(), обнуляє значення login_attempts. Створіть екземпляр класу User і викличте increment_login_attempts() кілька разів. Виведіть значення login_attempts, щоб 
+переконатися у тому, що значення було змінено правильно, а потім викличте reset_login_attempts(). Знову виведіть login_attempts і переконайтеся у тому, що значення обнулилося
+c.	Адміністратор - користувач з повними адміністративними привілеями. Напишіть клас з ім’ям Admin, що успадковує від класу User. Додайте атрибут privileges для зберігання списку 
+рядків виду «Allowed to add message», «Allowed to delete users», «Allowed to ban users» і т. д. Напишіть метод show_privileges() для виведення набору привілеїв адміністратора. 
+Створіть екземпляр Admin і викличте метод.
+d.	Напишіть клас Privileges. Клас повинен містити всього один атрибут privileges зі списком, який треба забрати із класу Admin. Водночас, необхідно перемістити метод 
+show_privileges() у клас Privileges із класу Admin. Створіть екземпляр priv як атрибут класу Admin. Створіть новий екземпляр admin і використайте метод для виведення 
+списку привілеїв.
+e.	Збережіть клас User в одному модулі, а класи Privileges і Admin у іншому модулі. В окремому файлі створіть екземпляр admin і викличте метод show_privileges(), щоб перевірити, 
+що все працює правильно.
 """
-print('\nTASK 8!!!')
+
+from modules import user
+from modules import admin
+
+print('\nTASK 9!!!')
+print('a)')
+task_9_1_user: user.User = user.User('Andrii', 'Babushko', 'andriibabushko@gmail.com', 'AndriiRaccoon', True)
+task_9_1_user.greeting_user()
+task_9_1_user.describe_user()
+
+print('\nb)')
+incrementing: int = 5
+print(f'Incrementing login attempts 1_user {incrementing} times...')
+for iterator in range(0, incrementing):
+    task_9_1_user.increment_login_attempts()
+print(f'Current login attempts: {task_9_1_user.login_attempts}')
+task_9_1_user.reset_login_attempts()
+print(f'Login attempts after resetting: {task_9_1_user.login_attempts}')
+incrementing: int = 10
+print(f'Repeating incrementing login attempts 1_user {incrementing} times...')
+for iterator in range(0, incrementing):
+    task_9_1_user.increment_login_attempts()
+print(f'Current login attempts: {task_9_1_user.login_attempts}')
+task_9_1_user.reset_login_attempts()
+print(f'Login attempts after resetting: {task_9_1_user.login_attempts}')
+
+print('\nc)')
+task_9_1_admin: admin.Admin = admin.Admin('Andrii', 'Babushko', 'andriibabushko@gmail.com', 'AndriiRaccoon', True,
+                                          ['Allowed to block users', 'Allowed to delete messages', 'Allowed to send voices', 'Allowed to delete users'])
+task_9_1_admin.show_privileges()
+
+print('\nd)')
+print('Show privileges by using class intense inside Admin class:')
+task_9_1_admin.admin_privileges.show_privileges()
+
+print('\ne)')
+task_9_2_admin: admin.Admin = admin.Admin('Ihor', 'Juice', 'ihorjuice@gmail.com', 'KindOfHell', False,
+                                          ['Allowed to block users', 'Allowed to delete messages', 'Allowed to delete voices', 'Allowed to delete users', 'Allowed to delete app'])
+task_9_2_admin.admin_privileges.show_privileges()
