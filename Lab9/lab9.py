@@ -1,6 +1,6 @@
 """ Lab 9. Python. Andrii Babushko. Repository: https://github.com/AndriiBabushko/Python """
+import math
 import string
-from typing import Type
 
 # task 1
 """
@@ -73,7 +73,7 @@ class EngAlphabet(Alphabet):
 
 
 print('TASK 1!!!')
-print('ENG!')
+print('\nENG!')
 task_1_eng_alphabet: EngAlphabet = EngAlphabet('ENG', list(string.ascii_uppercase))
 task_1_eng_alphabet.print_alphabet()
 print(f'Count letters in {task_1_eng_alphabet.language} alphabet: {task_1_eng_alphabet.letters_num()}')
@@ -201,13 +201,14 @@ print(task_2_human.info())
 3.	Створіть клас Apple. Його статичний атрибут states, яке буде містити всі стадії дозрівання яблука («Відсутнє», «Цвітіння», «Зелене», «Червоне»). 
 Метод __init __(), всередині якого будуть визначені два динамічних protected атрибути: _index (номер яблука) і _state (приймає перше значення зі словника states).
 Створіть метод grow(), який буде переводити яблуко на наступну стадію дозрівання Створіть метод is_ripe(), який буде перевіряти, що яблуко дозріло 
-(досягло останньої стадії дозрівання). Створіть клас AppleTree. Визначте метод __init __(), який буде приймати як параметр кількість яблук і на його основі буде 
-створювати список об'єктів класу Apple. Даний список буде зберігатися всередині динамічного атрибуту apples. Створіть метод grow_all(), який буде переводити всі 
-об'єкти зі списку яблук на наступний етап дозрівання. Створіть метод all_are_ripe(), який буде повертати True, якщо все яблука зі списку стали стиглими. 
-Створіть метод give_away_all(), який буде чистити список яблук після збору врожаю Створіть клас Gardener. Його метод __init __(), міститиме два динамічних атриути: 
-name (ім’я садівника, публічний атрибут) і _tree (приймає об’єкт класу AppleTree). Створіть метод work(), який змушує садівника працювати, що дозволяє яблукам 
-ставати більш стиглими. Створіть метод harvest(), який перевіряє, чи всі плоди дозріли. Якщо всі - садівник збирає урожай. Якщо і - метод друкує попередження. 
-Створіть статичний метод apple_base(), який виведе в консоль довідку з кількості яблук і ступені їх стиглості. 
+(досягло останньої стадії дозрівання). 
+Створіть клас AppleTree. Визначте метод __init __(), який буде приймати як параметр кількість яблук і на його основі буде створювати список об'єктів класу Apple. 
+Даний список буде зберігатися всередині динамічного атрибуту apples. Створіть метод grow_all(), який буде переводити всі об'єкти зі списку яблук на наступний етап дозрівання. 
+Створіть метод all_are_ripe(), який буде повертати True, якщо все яблука зі списку стали стиглими. Створіть метод give_away_all(), який буде чистити список яблук після збору 
+врожаю 
+Створіть клас Gardener. Його метод __init __(), міститиме два динамічних атриути: name (ім’я садівника, публічний атрибут) і _tree (приймає об’єкт класу AppleTree). 
+Створіть метод work(), який змушує садівника працювати, що дозволяє яблукам ставати більш стиглими. Створіть метод harvest(), який перевіряє, чи всі плоди дозріли. 
+Якщо всі - садівник збирає урожай. Якщо і - метод друкує попередження. Створіть статичний метод apple_base(), який виведе в консоль довідку з кількості яблук і ступені їх стиглості. 
 Тести до модуля:
 -	Створіть декілька об’єктів класу Apple.
 -	Викличте довідку по всім наявним яблукам
@@ -218,7 +219,97 @@ name (ім’я садівника, публічний атрибут) і _tree 
 -	Зберіть урожай.
 """
 
+
+class Apple:
+    states: dict[int, str] = {0: 'Відсутнє', 1: 'Цвітіння', 2: 'Зелене', 3: 'Червоне'}
+
+    def __init__(self, index: int, state: int = 0) -> None:
+        self._index: int = index
+        self._state: int = state
+
+    def grow(self) -> None:
+        if self._state < 3:
+            self._state += 1
+
+    def is_ripe(self) -> bool:
+        if self._state == 3:
+            return True
+        return False
+
+    def info(self) -> str:
+        return f'Apple number: {self._index}; Apple state: {self._state}'
+
+
+class AppleTree:
+    def __init__(self, apples_count: int) -> None:
+        self.apples: list[Apple] = [Apple(apple_number) for apple_number in range(0, apples_count)]
+
+    def grow_all(self) -> None:
+        for apple in self.apples:
+            apple.grow()
+
+    def all_are_ripe(self) -> bool:
+        for apple in self.apples:
+            if not apple.is_ripe():
+                return False
+        return True
+
+    def give_away_all(self) -> bool:
+        if self.all_are_ripe():
+            self.apples = []
+            return True
+        return False
+
+
+class Gardener:
+    def __init__(self, name: str, apple_tree: AppleTree) -> None:
+        self.name: str = name
+        self._tree: AppleTree = apple_tree
+
+    def work(self) -> None:
+        print(f'{self.name}\'s working in process...')
+        self._tree.grow_all()
+
+    def harvest(self) -> bool:
+        print('Try to harvest crop...')
+        if self._tree.all_are_ripe():
+            print('The crop is harvested!')
+            self._tree.give_away_all()
+            return True
+        else:
+            print('The crop is not harvested!')
+            return False
+
+    @staticmethod
+    def apple_base() -> None:
+        print('Here is a guide to play this little class game:\n'
+              'Each apple has 4 states: '
+              '*) None\n'
+              '*) Flowering\n'
+              '*) Green\n'
+              '*) Red\n'
+              'In order for apples to grow, you need to make the gardener work!')
+
+
 print('\nTASK 3!!!')
+task_3_apple_1: Apple = Apple(1)
+task_3_apple_1.info()
+task_3_apple_2: Apple = Apple(2)
+task_3_apple_2.info()
+task_3_apple_3: Apple = Apple(3)
+task_3_apple_3.info()
+
+Gardener.apple_base()
+task_3_apple_tree: AppleTree = AppleTree(10)
+task_3_gardener: Gardener = Gardener('Andrii', task_3_apple_tree)
+attempt: int = 1
+while True:
+    print(f'Attempt #{attempt}')
+    if task_3_gardener.harvest():
+        break
+    else:
+        task_3_gardener.work()
+        attempt += 1
 
 # task 4
 """
