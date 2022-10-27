@@ -1,5 +1,6 @@
 """ Lab 9. Python. Andrii Babushko. Repository: https://github.com/AndriiBabushko/Python """
 import string
+from typing import Type
 
 # task 1
 """
@@ -99,10 +100,10 @@ else:
 Реалізуйте приватний метод make_deal(), який буде відповідати за технічну реалізацію покупки будинку: зменшувати кількість грошей на рахунку і привласнювати 
 посилання на тільки що куплений будинок. В якості аргументів даний метод приймає об'єкт будинку та його ціну. Реалізуйте метод earn_money(), що збільшує 
 значення поля money. Реалізуйте метод buy_house(), який буде перевіряти, що у людини достатньо грошей для покупки, і здійснювати операцію. Якщо грошей занадто
-мало - потрібно вивести попередження в консоль. Параметри методу: посилання на будинок і розмір знижки (за замовчуванням 10%). Створіть клас House. Його метод
-__init __() містить два динамічних параметри: _area і _price, що мають значення за замовчуваннями. Створіть метод final_price(), який приймає як параметр 
-розмір знижки і повертає ціну з урахуванням даної знижки. Створіть клас SmallHouse, успадкувавши його функціонал від класу House. Всередині класу SmallHouse 
-перевизначите метод __init __() так, щоб він створював об'єкт з площею 40м2 
+мало - потрібно вивести попередження в консоль. Параметри методу: посилання на будинок і розмір знижки (за замовчуванням 10%). 
+Створіть клас House. Його метод __init __() містить два динамічних параметри: _area і _price, що мають значення за замовчуваннями. Створіть метод final_price(), 
+який приймає як параметр розмір знижки і повертає ціну з урахуванням даної знижки. 
+Створіть клас SmallHouse, успадкувавши його функціонал від класу House. Всередині класу SmallHouse перевизначите метод __init __() так, щоб він створював об'єкт з площею 40м2 
 Тести до модуля: 
 -	Викличте довідковий метод default_info() для класу Human 
 -	Створіть об'єкт класу Human
@@ -114,7 +115,86 @@ __init __() містить два динамічних параметри: _area
 -	Подивіться, як змінився стан об'єкта класу Human.
 """
 
+
+class House:
+    def __init__(self, area: int = 50, price: float = 250000) -> None:
+        self._area: int = area
+        self._price: float = price
+
+    def final_price(self, discount=0) -> float:
+        return self._price - (self._price * discount / 100)
+
+    def __str__(self) -> str:
+        return f'Area: {self._area}; Price: {self._price};'
+
+    def get_price(self) -> float:
+        return self._price
+
+
+class SmallHouse(House):
+    def __init__(self) -> None:
+        self.area = 40
+        super().__init__(self.area)
+
+
+class Human:
+    default_name: str = 'Andrey'
+    default_age: int = 18
+
+    def __init__(self, name: str, age: int, money: float = 0, house: House = None) -> None:
+        self.name: str = name
+        self.age: int = age
+        self.__money: float = money
+        self.__house: House = house
+
+    def info(self) -> str:
+        return f'Info:\nName: {self.name}; Age: {self.age}; Money: {self.__money}; House: {self.__house}'
+
+    @staticmethod
+    def default_info() -> str:
+        return f'Default info:\nDefault name: {Human.default_name}; Default age: {Human.default_age};'
+
+    def __make_deal(self, house: House, price: float = 0) -> tuple:
+        self.__money -= price
+        self.__house = house
+        return self.__money, self.__house
+
+    def earn_money(self, salary: float) -> float:
+        print('Earning money...')
+        self.__money += salary
+        return self.__money
+
+    def buy_house(self, house, price: float, discount: int = 10) -> tuple:
+        print('Buying house...')
+        price: float = price - (price * discount / 100)
+        if price <= self.__money:
+            print('House has been bought!')
+            self.__house = house
+            self.__money -= price
+            return self.__money, self.__house
+        else:
+            print("House hasn't been bought!")
+            return self.__money, self.__house
+
+
 print('\nTASK 2!!!')
+
+print(Human.default_info())
+task_2_human: Human = Human('Andrii', 18, 550000.0)
+print(task_2_human.info())
+
+task_2_small_house: SmallHouse = SmallHouse()
+task_2_human.buy_house(task_2_small_house, task_2_small_house.get_price())
+print(task_2_human.info())
+
+task_2_human.earn_money(300000.0)
+print(task_2_human.info())
+
+task_2_house: House = House(100, 800000)
+task_2_human.buy_house(task_2_house, task_2_house.get_price())
+task_2_house: House = House(75, 600000)
+task_2_human.buy_house(task_2_house, task_2_house.get_price())
+print(task_2_human.info())
 
 # task 3
 """
