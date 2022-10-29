@@ -1,5 +1,9 @@
 """ Lab 9. Python. Andrii Babushko. Repository: https://github.com/AndriiBabushko/Python """
-import math
+from __future__ import annotations
+from typing import TextIO
+from matplotlib import pyplot as plt
+import csv
+import os.path
 import string
 
 # task 1
@@ -340,4 +344,314 @@ while True:
 -	Для класу KmrWork використайте методи compare_csv() і compare_avg_plots().
 """
 
+
+class KmrCsv:
+    import os
+
+    def __init__(self, ref: str, num: int):
+        if self.os.path.isfile(ref):
+            self.ref: str = ref
+            self.number: int = num
+        else:
+            print('File does not exist!')
+            self.ref = None
+            self.number = None
+
+    def _get_read_lines(self) -> list:
+        import io
+        try:
+            if os.path.isfile(self.ref):
+                with io.open(rf'{self.ref}', 'rt', encoding='utf-8') as krm_csv:
+                    marks_csv = csv.reader(krm_csv)
+                    return [line for line in marks_csv]
+            else:
+                raise Exception('Can\'t find file!')
+        except Exception as exc:
+            print('Caught this error: ' + repr(exc))
+
+    def _get_students_id(self) -> list:
+        students: list = self._get_read_lines()
+
+        students_id: list = []
+        for student in students:
+            students_id.append(student[0])
+
+        return students_id
+
+    def _get_student_answers(self) -> list:
+        student_answers: list = []
+        marks: list = self._get_read_lines()
+
+        for answers in marks:
+            student_answers.append(answers[5:])
+
+        return student_answers
+
+    def _get_student_marks(self) -> list:
+        kmr_marks: list = []
+        marks: list = self._get_read_lines()
+
+        for i in range(len(marks)):
+            mark_string = marks[i][4].split(',')
+            mark_number = float(mark_string[0]) + float(int(mark_string[1]) / 100)
+            kmr_marks.append(mark_number)
+
+        return kmr_marks
+
+    def _get_student_count(self) -> int:
+        return len(self._get_read_lines())
+
+    def file_info(self):
+        if not os.path.isdir(r'./task4'):
+            os.mkdir(r'./task4')
+
+        marks = self._get_read_lines()
+
+        print(f'Kmr number: {self.number}; Count of student who pass KMR: {len(marks)}')
+
+
+class Statistics(KmrCsv):
+    def __init__(self, ref: str, num: int) -> None:
+        super().__init__(ref, num)
+
+    @staticmethod
+    def __remove_dict_duplicates(dictionary: dict) -> dict:
+        result: dict = {}
+
+        for key, value in dictionary.items():
+            if value not in result.values():
+                result[key] = value
+
+        return result
+
+    def avg_stat(self) -> tuple:
+        numbers_list: list = []
+        student_answers: list = list(self._get_student_answers())
+
+        answer_counter: int = 0
+        while answer_counter < len(student_answers[0]):
+            correct_answers: int = 0
+            for answer in student_answers:
+                if answer[answer_counter] == '0,50':
+                    correct_answers += 1
+
+            answer_counter += 1
+            numbers_list.append(round((correct_answers / len(student_answers)) * 100))
+
+        return tuple(numbers_list)
+
+    def marks_stat(self) -> dict:
+        certain_marks_dict: dict = {}
+
+        kmr_marks: list = self._get_student_marks()
+        student_counter: int = 0
+
+        for mark in kmr_marks:
+            for mark_check in kmr_marks:
+                if mark_check == mark:
+                    student_counter += 1
+            certain_marks_dict[mark] = student_counter
+            student_counter = 0
+
+        certain_marks_dict: dict = self.__remove_dict_duplicates(certain_marks_dict)
+
+        return certain_marks_dict
+
+    def marks_per_time(self) -> dict:
+        students_time: list = []
+        marks: list = self._get_read_lines()
+        students_marks: list = self._get_student_marks()
+
+        for i in range(self._get_student_count()):
+            time: str = marks[i][3].split(' ')
+            if len(time) > 2:
+                minutes = int(time[0])
+                seconds = int(time[2]) + minutes * 60
+            else:
+                minutes = int(time[0])
+                seconds = minutes * 60
+            students_time.append(seconds)
+
+        students_mark_per_min: dict = {}
+        students_id: list = self._get_students_id()
+
+        for i in range(0, self._get_student_count()):
+            students_mark_per_min[students_id[i]] = (round((students_marks[i] / students_time[i]) * 60, 2))
+
+        return students_mark_per_min
+
+    def best_marks_per_time(self, bottom_margin: float = 0, top_margin: float = 10) -> dict:
+        students_code: list = list(self.marks_per_time().keys())
+        student_marks: list = self._get_student_marks()
+        marks_per_time: list = list(self.marks_per_time().values())
+
+        interval_students_code: list = []
+        interval_student_marks: list = []
+        interval_marks_per_time: list = []
+        for i in range(0, len(marks_per_time)):
+            if bottom_margin <= student_marks[i] <= top_margin:
+                interval_students_code.append(students_code[i])
+                interval_student_marks.append(student_marks[i])
+                interval_marks_per_time.append(marks_per_time[i])
+
+        top_5_results: dict = {}
+        for i in range(0, 5):
+            max_average_mark = max(interval_marks_per_time)
+            index_of_student = interval_marks_per_time.index(max_average_mark)
+            top_5_results[interval_students_code[index_of_student]] = f'{interval_student_marks[index_of_student]}, {interval_marks_per_time[index_of_student]}'
+            interval_marks_per_time.pop(index_of_student)
+            # print(f'Top {i + 1}! {index_of_student + 1} student has {top_5_results[i]}/min mark.')
+        return top_5_results
+
+
+class Plots(Statistics):
+    def __init__(self, ref: str, num: int, work_dir: str) -> None:
+        super().__init__(ref, num)
+        self.work_dir_ref: str = work_dir
+
+    def set_cat(self, dir_name: str) -> None:
+        if not os.path.isdir(rf'./{dir_name}'):
+            os.mkdir(self.work_dir_ref)
+
+    def avg_plot(self) -> None:
+        avg_stat: tuple = self.avg_stat()
+        answers: tuple = tuple(answer for answer in range(1, len(avg_stat) + 1))
+        plt.plot(answers, avg_stat)
+        plt.ylabel('Average statistics')
+        plt.xlabel('Answers')
+        plt.savefig(rf'{self.work_dir_ref}/avg_plot.png')
+        plt.clf()
+
+    def marks_plot(self) -> None:
+        marks_stat: dict = self.marks_stat()
+        plt.plot(list(marks_stat.keys()), list(marks_stat.values()))
+        plt.ylabel('Total count of marks')
+        plt.xlabel('Marks')
+        plt.savefig(rf'{self.work_dir_ref}/marks_plot.png')
+        plt.clf()
+
+    def best_marks_plot(self) -> None:
+        best_marks_per_time: dict = self.best_marks_per_time(1, 9)
+        marks: list = []
+        avg_marks: list = []
+        for best_mark in best_marks_per_time.values():
+            marks.append(best_mark.split(', ')[0])
+            avg_marks.append(best_mark.split(', ')[1])
+
+        plt.plot(marks, avg_marks)
+        plt.ylabel('Average marks per time')
+        plt.xlabel('Marks')
+        plt.savefig(rf'{self.work_dir_ref}/best_marks_plot.png')
+        plt.clf()
+
+
+class KmrWork(Plots):
+    import io
+
+    def __init__(self, ref: str, num: int, work_dir: str) -> None:
+        super().__init__(ref, num, work_dir)
+
+    @staticmethod
+    def __get_seconds_from_str(file_read_lines: list[str]) -> int:
+        time_sec: int = 0
+        for line in file_read_lines:
+            time: list[str] = line[3].split(' ')
+            if len(time) > 2:
+                minutes = int(time[0])
+                seconds = int(time[2]) + minutes * 60
+                time_sec += minutes * 60 + seconds
+            else:
+                minutes = int(time[0])
+                time_sec += minutes * 60
+
+        return time_sec
+
+    @staticmethod
+    def __get_max_kmr_time(file_read_lines: list[str]) -> int:
+        time_list: list = []
+        for line in file_read_lines:
+            time: list[str] = line[3].split(' ')
+            if len(time) > 2:
+                minutes = int(time[0])
+                seconds = int(time[2]) + minutes * 60
+                time_list.append(minutes * 60 + seconds)
+            else:
+                minutes = int(time[0])
+                time_list.append(minutes * 60)
+
+        max_time_sec: int = max(time_list)
+        return round(max_time_sec)
+
+    @staticmethod
+    def __check_kmr_print(file_variable: TextIO, first_kmr: KmrWork, second_kmr: KmrWork, message: str, first_check, second_check):
+        if first_check > second_check:
+            output_line: str = f'{message} KMR #{first_kmr.number}({first_check}) > KMR #{second_kmr.number}({second_check})!'
+            file_variable.write(output_line + '\n')
+            print(output_line)
+        elif first_check < second_check:
+            output_line: str = f'{message} KMR #{first_kmr.number}({first_check}) < KMR #{second_kmr.number}({second_check})!'
+            file_variable.write(output_line + '\n')
+            print(output_line)
+        else:
+            output_line: str = f'{message} KMR #{first_kmr.number}({first_check}) == KMR #{second_kmr.number}({second_check})!'
+            file_variable.write(output_line + '\n')
+            print(output_line)
+
+    def compare_csv(self, kmr_work: KmrWork) -> None:
+        first_kmr_work_count: int = self._get_student_count()
+        second_kmr_work_count: int = kmr_work._get_student_count()
+
+        first_student_marks: list[float] = self._get_student_marks()
+        first_student_marks_sum: float = 0
+        for mark in first_student_marks:
+            first_student_marks_sum += mark
+        first_students_avg_mark: float = round(first_student_marks_sum / len(first_student_marks), 3)
+
+        second_student_marks: list[float] = kmr_work._get_student_marks()
+        second_student_marks_sum: float = 0
+        for mark in second_student_marks:
+            second_student_marks_sum += mark
+        second_students_avg_mark: float = round(second_student_marks_sum / len(second_student_marks), 3)
+
+        first_read_lines: list = self._get_read_lines()
+        first_time_sec: int = self.__get_seconds_from_str(first_read_lines)
+
+        second_read_lines: list = kmr_work._get_read_lines()
+        second_time_sec: int = self.__get_seconds_from_str(second_read_lines)
+
+        first_avg_time: float = round(float(first_time_sec) / first_kmr_work_count / 60, 3)
+        second_avg_time: float = round(float(second_time_sec) / second_kmr_work_count / 60, 3)
+
+        if not os.path.isdir(rf'./{self.work_dir_ref}'):
+            os.mkdir(rf'./{self.work_dir_ref}')
+
+        with self.io.open(rf'./{self.work_dir_ref}/compare_csv_txt.txt', 'wt', encoding='utf-8') as compare_csv_txt:
+            KmrWork.__check_kmr_print(compare_csv_txt, self, kmr_work, 'The number of completed', first_kmr_work_count, second_kmr_work_count)
+            KmrWork.__check_kmr_print(compare_csv_txt, self, kmr_work, 'The average mark of', first_students_avg_mark, second_students_avg_mark)
+            KmrWork.__check_kmr_print(compare_csv_txt, self, kmr_work, 'The average time of', first_avg_time, second_avg_time)
+
+    def compare_avg_plots(self, kmr_work: KmrWork):
+        first_avg_stat: tuple = self.avg_stat()
+        second_avg_stat: tuple = kmr_work.avg_stat()
+        answers: tuple = tuple(answer for answer in range(1, len(first_avg_stat) + 1))
+
+        plt.plot(answers, first_avg_stat)
+        plt.ylabel('Average statistics')
+        plt.xlabel('Answers')
+        plt.savefig(rf'{self.work_dir_ref}/first_avg_plot.png')
+        plt.clf()
+
+        plt.plot(answers, second_avg_stat)
+        plt.ylabel('Average statistics')
+        plt.xlabel('Answers')
+        plt.savefig(rf'{self.work_dir_ref}/second_avg_plot.png')
+        plt.clf()
+
+
 print('\nTASK 4!!!')
+task_4_kmr1: KmrWork = KmrWork(r'./task4/marks.lab6.csv', 6, 'test')
+task_4_kmr2: KmrWork = KmrWork(r'./task4/marks2.lab11.csv', 11, 'test')
+task_4_kmr2.avg_plot()
+task_4_kmr2.marks_plot()
+task_4_kmr1.compare_csv(task_4_kmr2)
+task_4_kmr1.compare_avg_plots(task_4_kmr2)
