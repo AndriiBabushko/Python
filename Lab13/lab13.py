@@ -2,16 +2,17 @@ from bs4 import BeautifulSoup
 from requests import get
 from re import findall
 
+# 1. Визначте, в яких аудиторіях проводиться найбільше занять на ФІКТі серед усіх груп і усіх курсів.
+
+# Parse groups list
 request = get('https://rozklad.ztu.edu.ua')
 html = BeautifulSoup(request.content, "lxml")
 
-# Визначте, в яких аудиторіях проводиться найбільше занять на ФІКТі серед усіх груп і усіх курсів.
-
-# Parse groups list
 groups_list: list[str] = []
 groups = html.select('body > div:nth-child(15) .collection .collection-item')
 for group in groups:
     groups_list.append(group.text)
+
 
 # Parse rooms
 rooms_dict: dict = {}
@@ -46,6 +47,25 @@ print('Top 10 rooms in FIKT')
 for key, value in top_10_rooms.items():
     print(f'Room: {key}; Classes: {value}')
 
-# Визначте, в якій аудиторії частіше всього проходять заняття у вашої групи.
 
+# 3. Визначте, в якій аудиторії частіше всього проходять заняття у вашої групи.
 
+# Parse schedule of ВТ-21-1
+request = get('https://rozklad.ztu.edu.ua/schedule/group/' + 'ВТ-21-1')
+html = BeautifulSoup(request.content, "lxml")
+vt_21_1_rooms = html.select('.schedule .variative .room')
+vt_21_1_rooms_dict: dict = {}
+
+for room in vt_21_1_rooms:
+    room_number = findall(r'\d+', room.text).pop()
+
+    if room_number in vt_21_1_rooms_dict:
+        vt_21_1_rooms_dict[room_number] = vt_21_1_rooms_dict[room_number] + 1
+    else:
+        vt_21_1_rooms_dict[room_number] = 1
+
+# Find top 1 classroom
+vt_21_1_rooms_values: list = list(vt_21_1_rooms_dict.values())
+vt_21_1_max_index = vt_21_1_rooms_values.index(max(vt_21_1_rooms_values))
+print('Top 1 room of ВТ-21-1')
+print(f'Room: {list(vt_21_1_rooms_dict.keys())[vt_21_1_max_index]}; Classes: {vt_21_1_rooms_values[vt_21_1_max_index]}')
