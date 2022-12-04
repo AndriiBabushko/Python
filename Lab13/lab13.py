@@ -29,8 +29,6 @@ for group in groups_list:
         else:
             rooms_dict[room_number] = 1
 
-print(rooms_dict)
-
 # Find top 10 max rooms
 top_10_rooms: dict = {}
 rooms_keys: list = list(rooms_dict.keys())
@@ -67,5 +65,5 @@ for room in vt_21_1_rooms:
 # Find top 1 classroom
 vt_21_1_rooms_values: list = list(vt_21_1_rooms_dict.values())
 vt_21_1_max_index = vt_21_1_rooms_values.index(max(vt_21_1_rooms_values))
-print('Top 1 room of ВТ-21-1')
+print('\nTop 1 room in ВТ-21-1')
 print(f'Room: {list(vt_21_1_rooms_dict.keys())[vt_21_1_max_index]}; Classes: {vt_21_1_rooms_values[vt_21_1_max_index]}')
