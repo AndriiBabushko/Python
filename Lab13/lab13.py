@@ -46,12 +46,16 @@ for key, value in top_10_rooms.items():
     print(f'Room: {key}; Classes: {value}')
 
 
-# 3. Визначте, в якій аудиторії частіше всього проходять заняття у вашої групи.
-
-# Parse schedule of ВТ-21-1
+# 2. Розрахувати кількість занять за місяць у своїй групі
 request = get('https://rozklad.ztu.edu.ua/schedule/group/' + 'ВТ-21-1')
 html = BeautifulSoup(request.content, "lxml")
 vt_21_1_rooms = html.select('.schedule .variative .room')
+print(f'The number of ВТ-21-1 classes in 28 days: {len(vt_21_1_rooms) * 2}')
+
+
+# 3. Визначте, в якій аудиторії частіше всього проходять заняття у вашої групи.
+
+# Parse schedule of ВТ-21-1
 vt_21_1_rooms_dict: dict = {}
 
 for room in vt_21_1_rooms:
